@@ -1,10 +1,12 @@
 <html>
     <head>
-
+        <title>
+            ReporThing || Inicio
+        </title>
     </head>
     <body>
         <div>
-            Hola mundo
+
         </div>
     </body>
 </html>
