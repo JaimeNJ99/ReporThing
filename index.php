@@ -8,5 +8,6 @@
         <div>
             Pagina principal
         </div>
+        <label> Bienvenido </label>        
     </body>
 </html>
