@@ -1,3 +1,10 @@
+<?php
+    
+    require "header.php";
+    
+    
+
+?>
 <html>
     <head>
         <title>
@@ -8,6 +15,7 @@
         <div>
             Pagina principal
         </div>
-        <label> Bienvenido </label>        
+        <label> Bienvenido </label>
+        <?php require "footer.php"; ?>        
     </body>
-</html>
+</html> 
