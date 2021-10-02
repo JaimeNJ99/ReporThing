@@ -12,16 +12,14 @@
                 display: inline-block;
             }
             #nombreheader{
-                width: 80%;
+                width: 84%;
                 height: auto;
                 display: inline-block;
                 text-align: left;
             }
             #usuario{
                 width: 9%;
-                border: 1px solid #000;
                 display: inline-block;
-
             }
             #menu{
                 width: 100%;
@@ -42,7 +40,7 @@
         <div id = "header">
             <div id = "logo"><a href="index.php"><img src = "imagenes/recursos/logo.png" width="60px" height="60px"></a></div>
             <div id = "nombreheader"><h1>ReporThing</h1></div>
-            <div id = "usuario"><a><img src = "imagenes/avatar/<?php $avatar ?>"></a></div>
+            <div id = "usuario"><a><img src = "imagenes/avatar/default.png" width="100px" height="60px"></a></div>
         </div>
         <div id = "menu">
             <div class ="botonmenu"><a href="index.php">Inicio</a></div>
