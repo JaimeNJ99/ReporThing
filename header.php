@@ -52,7 +52,7 @@
             <div class ="botonmenu"><a href="">Mapa</a></div>
             <div class ="botonmenu"><a href="">Reportes</a></div>
             <div class ="botonmenu"><a href="">Gráficas</a></div>
-            <div class ="botonmenu"><a href=""></a></div>
+            <div class ="botonmenu"><a href="login.php">Iniciar sesión</a></div>
         </div>
     </body>
 </html>
