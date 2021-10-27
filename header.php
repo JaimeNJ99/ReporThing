@@ -1,3 +1,8 @@
+<?php
+    require "funciones/conexion.php";
+    $conn = conexion(); //conexion a la BD
+    
+?>
 <html>
     <head>
         <style>
@@ -46,8 +51,8 @@
             <div class ="botonmenu"><a href="index.php">Inicio</a></div>
             <div class ="botonmenu"><a href="">Mapa</a></div>
             <div class ="botonmenu"><a href="">Reportes</a></div>
-            <div class ="botonmenu"><a href="">Graficas</a></div>
-            <div class ="botonmenu"><a href="">Info</a></div>
+            <div class ="botonmenu"><a href="">Gráficas</a></div>
+            <div class ="botonmenu"><a href=""></a></div>
         </div>
     </body>
 </html>

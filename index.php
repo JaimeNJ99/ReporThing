@@ -2,8 +2,10 @@
     
     require "header.php";
     
-    
-
+    $consulta = mysqli_query($conn,"SELECT titulo FROM reportes WHERE id_reporte = 4");
+    //$row = mysqli_num_rows($sql);
+    //$consulta = mysqli_fetch_array($sql);
+    //$nombre = $consulta["titulo"];
 ?>
 <html>
     <head>
@@ -15,7 +17,9 @@
         <div>
             Pagina principal
         </div>
+       <div><?php echo $row ?></div>
         <label> Bienvenido </label>
+        <div></div>
         <?php require "footer.php"; ?>        
     </body>
 </html> 
