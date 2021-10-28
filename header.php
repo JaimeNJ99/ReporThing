@@ -1,7 +1,7 @@
 <?php
     require "funciones/conexion.php";
     $conn = conexion(); //conexion a la BD
-    
+
 ?>
 <html>
     <head>
@@ -49,10 +49,10 @@
         </div>
         <div id = "menu">
             <div class ="botonmenu"><a href="index.php">Inicio</a></div>
-            <div class ="botonmenu"><a href="">Mapa</a></div>
+            <div class ="botonmenu"><a href="mapa.php">Mapa</a></div>
             <div class ="botonmenu"><a href="">Reportes</a></div>
             <div class ="botonmenu"><a href="">Gráficas</a></div>
-            <div class ="botonmenu"><a href=""></a></div>
+            <div class ="botonmenu"><a href="login.php">Iniciar sesión</a></div>
         </div>
     </body>
 </html>

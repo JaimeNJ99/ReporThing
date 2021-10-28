@@ -11,7 +11,9 @@
   #mapa{
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    margin: auto;
+    border: 1px solid #010;
   }
 </style>
 <html>
@@ -23,7 +25,7 @@
     <body>
        <div><?php echo $row ?></div>
 
-        <div><label> Mapa </label></div>
+        <h2 style="text-align: center">Mapa</h2></div>
         <div id="mapa">
           <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7466.634968392862!2d-103.32510549267577!3d20.656658667736377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2smx!4v1635376389953!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
