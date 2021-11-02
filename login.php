@@ -6,10 +6,10 @@
         <script src="JavaScript/jquery-3.6.0.min.js"></script>
         <script>
             function validar(){ //valida si el usuario y contraseña son correctos
-                var correo = $('correo').val();
-                var pass = $('password').val();
+                var correo = $('#correo').val();  //tomamos los valores actuales de los input
+                var pass = $('#password').val();
 
-                if(correo == '' || pass == ''){
+                if(correo == '' || pass == ''){ //si faltan campos mandamos error
                     $('mensaje').html('Faltan campos por llenar.');
                     setTimeout("$('#mensaje').html('')", 5000);
                     return false;
@@ -73,6 +73,7 @@
                 <div class="columna">¿No tienes una cuenta? <a href="register.php">Registrate</a></div>
                 <div id="mensaje" class="error"></div>
             </div>
+            <br><br><br><br>
         </form>
     </body>
     <?php require "footer.php" ?>

@@ -1,6 +1,14 @@
 <?php
+    session_start();
+
     require "funciones/conexion.php";
     $conn = conexion(); //conexion a la BD
+
+    //si existe la sesion tomamos el id
+    if($_SESSION["idu"]){
+        $idu = $_SESSION["idu"];
+        $nameu = $_SESSION["nombre"];
+    }
 
 ?>
 <html>
@@ -50,8 +58,8 @@
         <div id = "menu">
             <div class ="botonmenu"><a href="index.php">Inicio</a></div>
             <div class ="botonmenu"><a href="mapa.php">Mapa</a></div>
-            <div class ="botonmenu"><a href="">Reportes</a></div>
-            <div class ="botonmenu"><a href="">Gráficas</a></div>
+            <div class ="botonmenu"><a href="reportes.php">Reportes</a></div>
+            <div class ="botonmenu"><a href="graficas.php">Gráficas</a></div>
             <div class ="botonmenu"><a href="login.php">Iniciar sesión</a></div>
         </div>
     </body>

@@ -95,6 +95,6 @@
                 <div class="entrada"><b>Nombre del reporte<br>ubicacion <br> fecha y hora</b></div>
             </div>
         </div>
-        
+        <?php require "footer.php" ?>
     </body>
 </html>

@@ -3,7 +3,7 @@
         <style>
             #footer{
                 background-color: #D3D3D3;
-                position:absolute;
+                margin:auto;
                 bottom:0;
                 width:100%;
                 height:auto;
