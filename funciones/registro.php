@@ -1,0 +1,40 @@
+<?php
+
+    require "conexion.php";
+    $conn = conexion();   
+
+    //recibimos las variables
+    $correo     = $_REQUEST['correo'];
+    $user       = $_REQUEST['user'];
+    $pass       = $_REQUEST['password'];
+    $avatar     = $_FILES['avatar']['name'];        //nombre del archivo
+    $avatar_enc = $_FILES['avatar']['tmp_name'];    //ubicacion temporal del archivo
+    $admin = 0;
+    
+    //cifrar la contraseña
+    $pass = md5($pass); 
+
+    //definimos ruta del archivo
+	$cadena     = explode(".", $avatar);
+	$ext        = end($cadena);
+	$dir        = "../imagenes/avatar/";
+    $enc        = md5_file($avatar_enc);
+    
+    //si se subio un archivo
+    if($avatar != ''){
+		$fileName1 = "$enc.$ext";
+        //copiamos la imagen en la carpeta
+        copy($avatar_enc ,$dir.$fileName1);
+	}
+    
+    
+    $sql = "INSERT INTO usuarios VALUES(0,'$user','$correo','$pass','$admin','$fileName1')";
+    $res = mysqli_query($conn,$sql);
+
+    if(!$res){
+        echo "No se ha podido insertar " . mysqli_errno($conn);
+        return;
+    }
+    
+    header("Location: ../login.php");
+?>
