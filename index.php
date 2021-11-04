@@ -1,5 +1,5 @@
 <?php
-    
+
     require "header.php";
     /*----------Ejemplo de como hacer consultas a la bd------------------------
     $sql = "SELECT titulo FROM reportes WHERE id_reporte = 4"; //se realiza la consulta sql
@@ -17,13 +17,14 @@
     </head>
     <body>
         <div><?php $nameu ?></div>
-	<center> 
+	<center>
 		<h1> <br> <img src = "imagenes/recursos/logo.png" width="60px" height="60px">
-			<img src = "imagenes/recursos/Report.jpg" width="100px" height="60px"> 
+			<img src = "imagenes/recursos/Report.jpg" width="100px" height="60px">
 			<img src = "imagenes/recursos/Thing.png" width="120px" height="60px"></h1>
-		<h4>ReporThing es una plataforma en la cual se busca ayudar a mantener informadas a las personas 
-		<br> acerca de distintos sucesos peligrosos o interesantes en su entorno</h4>	
-	</center> 
-        <?php require "footer.php"; ?>        
+		<h4>ReporThing es una plataforma en la cual se busca ayudar a mantener informadas a las personas
+		<br> acerca de distintos sucesos peligrosos o interesantes en su entorno</h4>
+    <a href="nuevoReporte.php"><img class="imagen"src="./imagenes/recursos/plus.png" width="100px" height="60px" /><label> Nuevo reporte</label></a>
+	</center>
+        <?php require "footer.php"; ?>
     </body>
-</html> 
+</html>
