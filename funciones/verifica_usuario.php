@@ -22,11 +22,15 @@
         $idu       = $array["id_usuarios"];
 		$nombre    = $array["username"];
 		$correo    = $array["correo"];
+        $admin     = $array["administrador"];
+        $avatar    = $array["avatar"];
         
         //variables de sesion iniciada 
 		$_SESSION['idu'] = $idu;
 		$_SESSION['nombre'] = $nombre;
 		$_SESSION['correo'] = $correo;
+        $_SESSION['admin'] = $admin;
+        $_SESSION['avatar'] = $avatar;
     }
     echo $rows;
 ?>

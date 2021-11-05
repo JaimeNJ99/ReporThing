@@ -3,6 +3,9 @@
 ?>
 <html>
     <head>
+        <title>
+            Registrate
+        </title>
     <script src="JavaScript/jquery-3.6.0.min.js"></script>
         <script>
             function registrar(){

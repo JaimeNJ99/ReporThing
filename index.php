@@ -24,6 +24,7 @@
 		<h4>ReporThing es una plataforma en la cual se busca ayudar a mantener informadas a las personas
 		<br> acerca de distintos sucesos peligrosos o interesantes en su entorno</h4>
     <a href="nuevoReporte.php"><img class="imagen"src="./imagenes/recursos/plus.png" width="100px" height="60px" /><label> Nuevo reporte</label></a>
+    <br><br><br><br>
 	</center>
         <?php require "footer.php"; ?>
     </body>

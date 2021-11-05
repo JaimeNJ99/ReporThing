@@ -19,7 +19,7 @@
 <html>
     <head>
         <title>
-            ReporThing || Mapa
+            Mapa
         </title>
     </head>
     <body>

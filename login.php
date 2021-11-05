@@ -3,6 +3,9 @@
 ?>
 <html>
     <head>
+        <title>
+            Inicia Sesión
+        </title>
         <script src="JavaScript/jquery-3.6.0.min.js"></script>
         <script>
             function validar(){ //valida si el usuario y contraseña son correctos
