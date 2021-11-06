@@ -24,6 +24,10 @@
         
         
         <style>
+            *{
+                margin: 0%;
+                padding: 0%;
+            }
             #header{
                 width:100%;
                 height: 70px;
@@ -88,6 +92,55 @@
                 display: inline-block;
                 background-color: #F0F8FF;
             }
+            .botonmenu a{
+                color: #000;
+                text-decoration: none;
+            }
+            .botonmenu a:hover{
+                color: #33BAFF;
+            }
+            #usuario ul{
+                position: absolute;
+                width: 200px;
+                height: auto;
+                top: 12%;
+                left: 80%;
+                display: none;
+                border: 2px solid #000;
+                background-color: #C1C9C6;
+            }
+            #usuario ul li a{
+                color: #397E88;
+                text-decoration: none;
+            }
+            #usuario ul li a:hover{
+                color: #33BAFF;
+            }
+            #usuario ul li {
+                width: 90%;
+                margin: auto;
+                text-align: center;
+                background-color: #DAE6E2;
+                display: none;
+            }
+            #usuario:hover ul{
+                display: block;
+            }
+            #usuario:hover ul li{
+                display: block;
+            }
+            #usuario ul a img{
+                margin: auto;
+                width: auto;
+                height: auto;
+                max-width: 150px;
+                max-height: 80px;
+                display: block;
+            }
+            #usuario ul b{
+                margin: auto;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -96,7 +149,19 @@
             <div id = "nombreheader">
                 <a href="index.php"><img src = "imagenes/recursos/Reporthing.png" class="logom" ></a>
             </div>
-            <div id = "usuario"><a href="login.php"><img src = "imagenes/avatar/<?php echo $avataru; ?>" id="img"></a></div>
+            <div id = "usuario">
+                <a><img src = "imagenes/avatar/<?php echo $avataru; ?>" id="img"></a>
+                <ul>
+                    <br>
+                    <a><img src = "imagenes/avatar/<?php echo $avataru; ?>" ></a>
+                    <h3 style="text-align: center; color: #397E88;"><?php echo $nameu ?></h3>
+                    <li><a href="perfil.php">Mi cuenta</a></li>
+                    <li><a href="Modificar_perfil.php">Modificar perfil</a></li>
+                    <li><a href="funciones/cerrarSesion.php">Cerrar sesión</a></li>
+                    <br>
+                </ul>
+            </div>
+            
             <div id = "loginm"><a href="login.php"><img src="imagenes/recursos/login.png"></a></div>
         </div>
         <div id = "menu">
