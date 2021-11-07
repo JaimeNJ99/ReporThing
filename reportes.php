@@ -5,6 +5,7 @@
 ?>
 <html>
     <head>
+        <title>Reportes</title>
         <style>
             .centro{
                 width: 100%;
