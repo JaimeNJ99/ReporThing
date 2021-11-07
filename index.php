@@ -14,6 +14,22 @@
         <title>
             ReporThing || Inicio
         </title>
+        <style>
+            #nuevo_reporte{
+                width: 260px;
+                height: 90px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #nuevo_reporte a img{
+                width: 250px; 
+                height: 80px;
+                margin: auto;
+            }
+            #nuevo_reporte a img:hover{
+               width: 260px;
+            }
+        </style>
     </head>
     <body>
         <div><?php $nameu ?></div>
@@ -23,9 +39,15 @@
 			<img src = "imagenes/recursos/Thing.png" width="120px" height="60px"></h1>
 		<h4>ReporThing es una plataforma en la cual se busca ayudar a mantener informadas a las personas
 		<br> acerca de distintos sucesos peligrosos o interesantes en su entorno</h4>
-    <a href="nuevoReporte.php"><img class="imagen"src="./imagenes/recursos/plus.png" width="100px" height="60px" /><label> Nuevo reporte</label></a>
+        <br>
+    </center>
+    <br>
+    <div id="nuevo_reporte">
+    <a href="nuevoReporte.php">
+        <img class="imagen"src="./imagenes/recursos/Nuevo_reporte.png">
+    </a>
+    </div>
     <br><br><br><br>
-	</center>
-        <?php require "footer.php"; ?>
+    <?php require "footer.php"; ?>
     </body>
 </html>

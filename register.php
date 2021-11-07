@@ -72,7 +72,9 @@
     </head>
     <body>
         <form  name="registro" action="funciones/registro.php" method="post" enctype="multipart/form-data">
+            <br><br>
             <h2 style="text-align: center">Registrate</h2>
+            <br>
             <div id="login">
                 <br>
                 <div class="columna"><label>Nombre: </label><input type="text" id="user" name="user" placeholder="Escribe tu nombre."></div><br> 

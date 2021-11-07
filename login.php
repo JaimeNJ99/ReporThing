@@ -61,7 +61,9 @@
     </head>
     <body>
         <form>
+            <br><br>
             <h2 style="text-align: center">Iniciar sesión</h2>
+            <br>
             <div id="login">
                 <br> 
                 <div class="columna">
