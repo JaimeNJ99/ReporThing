@@ -18,8 +18,8 @@
             }
             .tabla{
                 border: 1px solid #000;
-                max-height: 500px;
-                min-height: 300px;
+                max-height: 400px;
+                min-height: 400px;
                 height: auto;
                 width: 25%;
                 margin-right: 20px;
@@ -29,12 +29,19 @@
             .categorias{
                 border: 1px solid #000;
                 height: auto;
-                min-height: 300px;
-                max-height:500px;
+                min-height: 400px;
+                max-height: 400px;
                 width: 200px;
                 margin-right: 10px;
                 display: inline-block;
                 overflow-y: scroll;
+            }
+            .titulotabla{
+                background-color:steelblue;
+                height: 50px;
+                width: 98%;
+                border: 1px solid #000;
+                text-align: center;
             }
             .entrada{
                 text-align: center;
@@ -49,7 +56,7 @@
         <div><h1 style="text-align:center">Reportes</h1></div>
         <div class="centro">
             <div class="tabla">
-                <div class="entrada" style="background-color:steelblue"><h1>Reportes recientes</h1></div>
+                <div class="titulotabla"><h1>Reportes recientes</h1></div>
                 <?php 
                     $sql = "SELECT * FROM reportes ORDER BY id_reporte DESC LIMIT 10";
                     $res = mysqli_query($conn, $sql);
@@ -74,7 +81,7 @@
                 ?>
             </div>
             <div class="tabla">
-                <div class="entrada" style="background-color:steelblue"><h1>Más votados</h1></div>
+                <div class="titulotabla"><h1>Más votados</h1></div>
                 <?php 
                     $sql = "SELECT * FROM reportes WHERE id_reporte =
                     (SELECT id_reporte FROM rating ORDER BY calificacion DESC LIMIT 10)";
@@ -100,7 +107,7 @@
                 ?>
             </div>
             <div class="tabla">
-                <div class="entrada" style="background-color:steelblue"><h1>Cerca a tu zona</h1></div>
+                <div class="titulotabla"><h1>Cerca a tu zona</h1></div>
                 <?php 
                     $sql = "SELECT * FROM reportes WHERE id_reporte = 
                     (SELECT id_reporte FROM zona WHERE id_zona = $zona 
@@ -132,7 +139,7 @@
 
         <div class="centro">
         <div class="categorias">
-                <div class="entrada" style="background-color:steelblue"><h1>categoria</h1></div>
+                <div class="titulotabla"><h1>categoria</h1></div>
                 <?php 
                     $sql = "SELECT * FROM reportes
                     WHERE tipo = $tipo 
@@ -159,7 +166,7 @@
                 ?>
             </div>
             <div class="categorias">
-                <div class="entrada" style="background-color:steelblue"><h1>categoria</h1></div>
+                <div class="titulotabla"><h1>categoria</h1></div>
                 <?php 
                     $sql = "SELECT * FROM reportes
                     WHERE tipo = $tipo 
@@ -186,7 +193,7 @@
                 ?>
             </div>
             <div class="categorias">
-                <div class="entrada" style="background-color:steelblue"><h1>categoria</h1></div>
+                <div class="titulotabla"><h1>categoria</h1></div>
                 <?php 
                     $sql = "SELECT * FROM reportes
                     WHERE tipo = $tipo 
@@ -213,7 +220,7 @@
                 ?>
             </div>
             <div class="categorias">
-                <div class="entrada" style="background-color:steelblue"><h1>categoria</h1></div>
+                <div class="titulotabla"><h1>categoria</h1></div>
                 <?php 
                     $sql = "SELECT * FROM reportes
                     WHERE tipo = $tipo 
@@ -240,7 +247,7 @@
                 ?>
             </div>
             <div class="categorias">
-                <div class="entrada" style="background-color:steelblue"><h1>categoria</h1></div>
+                <div class="titulotabla"><h1>categoria</h1></div>
                 <?php 
                     $sql = "SELECT * FROM reportes
                     WHERE tipo = $tipo 

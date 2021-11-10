@@ -14,7 +14,7 @@
     $ubicacion  =$longitud.$coma.$latitud;
 
 
-    $sql = "INSERT INTO reportes VALUES(0,'$titulo','$tipo','$descripcion','$ubicacion','1')";
+    $sql = "INSERT INTO reportes VALUES(0,'$titulo','$tipo','$ubicacion','$descripcion','1')";
     $res = mysqli_query($conn,$sql);
 
     if(!$res){

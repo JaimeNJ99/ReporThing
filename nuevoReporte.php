@@ -36,15 +36,17 @@
         </script>
         <style>
             #login{
-                width: 450px;
-                height:860px;
+                width: 80%;
+                height: auto;
                 margin: auto;
-                border: 1px solid #010;
+                background-color: #efefef;
             }
             .columna{
                 margin-right: auto;
                 margin-left: auto;
                 text-align: center;
+                display: flexbox;
+               
             }
             .error{
                 color: FF0000;
@@ -56,29 +58,42 @@
             .google_canvas{
               height: 50vh;
               width: 60vh;
+              float: left;
+              margin-left: 80px;
+            }
+            .columna textarea{
+              resize: none;
+              width: 350px;
+              height: 130px;
+            }
+            .columna input[name ="enviar"] {
+              width: 50px;
+              height: 30px;
             }
         </style>
     </head>
     <body>
         <form  name="registro" action="funciones/registroReporte.php" method="post" enctype="multipart/form-data">
+            <br>
             <h2 style="text-align: center">Nuevo Reporte</h2>
+            <br>
             <div id="login">
                 <br>
                 <div class="columna"><label>Titulo: </label><input type="text" id="titulo" name="titulo" placeholder="Titulo del reporte."></div><br>
+                <div id="google_canvas"  class="google_canvas"></div>
                 <div class="columna"><label>Tipo: </label></div><br>
                 <div class="columna"><select name="tipo" id="tipo">
                   <option value="0"> Selecciona</option>
                   <option value="1"> Evento</option>
                   <option value="2"> Crimen</option>
                 </select></div><br><br>
-                <div class="columna"><label>Ubicaci&oacute;n: </label></div><br>
-                <div id="google_canvas"  class="google_canvas"></div>
                 <div class="columna"><label>Descripci&oacute;n:</label><br>
                 <textarea id="descripcion" class="descripcion" name="descripcion" rows="8" cols="25"></textarea></div><br>
                 <input type="hidden" id="latitud" name="latitud">
                 <input type="hidden" id="longitud" name="longitud">
-                <div class="columna"><input onClick="registrar(); return false;" type="submit" value="Enviar"></div>
+                <div class="columna"><input onClick="registrar(); return false;" type="submit" value="Enviar" name="enviar"></div>
                 <div id="mensaje" class="error"></div>
+                <br>
             </div>
         </form>
         <script type="text/javascript">
