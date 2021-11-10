@@ -1,5 +1,11 @@
 <?php
     require "header.php";
+
+    if(!$idu){
+      $id = time();
+    }else{
+      $id = $idu;
+    }
 ?>
 <html>
     <head>
@@ -93,6 +99,7 @@
                 <input type="hidden" id="longitud" name="longitud">
                 <div class="columna"><input onClick="registrar(); return false;" type="submit" value="Enviar" name="enviar"></div>
                 <div id="mensaje" class="error"></div>
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <br>
             </div>
         </form>

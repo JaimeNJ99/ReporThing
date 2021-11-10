@@ -4,6 +4,7 @@
     $conn = conexion();
 
     //recibimos las variables
+    $id           = $_REQUEST['id'];
     $titulo       = $_REQUEST['titulo'];
     $tipo         = $_REQUEST['tipo'];
     $descripcion  = $_REQUEST['descripcion'];
@@ -17,7 +18,16 @@
     $sql = "INSERT INTO reportes VALUES(0,'$titulo','$tipo','$ubicacion','$descripcion','1')";
     $res = mysqli_query($conn,$sql);
 
-    if(!$res){
+    $sql = "SELECT id_reporte FROM reportes 
+    WHERE titulo = '$titulo' AND tipo = '$tipo' AND ubicacion = '$ubicacion' 
+    AND descripcion = '$descripcion' AND estatus = 1";
+    $res2 = mysqli_query($conn, $sql);
+    $array = mysqli_fetch_row($res2);
+
+    $sql = "INSERT INTO reportes_realizados VALUES('$id', $array[0])";
+    $res2 = mysqli_query($conn, $sql);
+
+    if(!$res || !$res2){
         echo "No se ha podido insertar " . mysqli_errno($conn);
         return;
     }
