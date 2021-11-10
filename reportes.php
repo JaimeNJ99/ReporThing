@@ -19,6 +19,7 @@
             .tabla{
                 border: 1px solid #000;
                 max-height: 500px;
+                min-height: 300px;
                 height: auto;
                 width: 25%;
                 margin-right: 20px;
@@ -28,6 +29,7 @@
             .categorias{
                 border: 1px solid #000;
                 height: auto;
+                min-height: 300px;
                 max-height:500px;
                 width: 200px;
                 margin-right: 10px;
