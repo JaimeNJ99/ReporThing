@@ -9,6 +9,7 @@
     $pass       = $_REQUEST['password'];
     $avatar     = $_FILES['avatar']['name'];        
     $avatar_enc = $_FILES['avatar']['tmp_name'];
+    $fileName1 = '';
 
     $sql = "SELECT * FROM usuarios WHERE id_usuario = $id";
     $res = mysqli_query($conn,$sql);
@@ -27,12 +28,13 @@
 
     
 
-    $cadena     = explode(".", $avatar);
-	$ext        = end($cadena);
-	$dir        = "../imagenes/avatar/";
-    $enc        = md5_file($avatar_enc);
+
 
     if($avatar != ''){
+        $cadena     = explode(".", $avatar);
+        $ext        = end($cadena);
+        $dir        = "../imagenes/avatar/";
+        $enc        = md5_file($avatar_enc);
 		$fileName1 = "$enc.$ext";
         copy($avatar_enc ,$dir.$fileName1);    
 	}else{
