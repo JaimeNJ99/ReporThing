@@ -91,9 +91,9 @@
             </div>
         </form>
         <script type="text/javascript">
-          (function(){
+        var map;
+          (function iniGmap(){
             if(!!navigator.geolocation){
-              var map;
               var mapOptions={
                 zoom: 15,
                 mapTypeId: 'roadmap'
@@ -105,21 +105,53 @@
                 document.getElementById("latitud").value=latitud;
                 var longitud=position.coords.longitude;
                 document.getElementById("longitud").value=longitud;
+                        map.setCenter(geolocate);
 
-                 /*var infoWindow = new google.maps.InfoWindow({ -->
-                  map: map,
-                  position: geolocate,
-                  content:
-                  '<h1>Tu ubicaci&oacute;n:</h1>'+
-                  '<h2>Latitud: '+ position.coords.latitude+'</h2>'+
-                  '<h2>Longitud: '+ position.coords.longitude +'</h2>'
-                }); */
-                map.setCenter(geolocate);
-              });
-            }else {
-              document.getElementById("google_canvas").innerHTML="No Soportado";
-            }
-          }());
+                      <?php
+                          $sql = "SELECT * FROM reportes ORDER BY id_reporte DESC LIMIT 10";
+                          $res = mysqli_query($conn, $sql);
+                          $row = mysqli_num_rows($res);
+                          if($row == 0){?>
+
+                          <?php
+                        }else{
+                            for($i = 0; $i < $row; $i++){
+                                  $consulta = mysqli_fetch_row($res);?>
+
+                                  var nombrereporte="<?php echo $consulta[1]; ?>";
+                                  var latitudreporte=<?php echo $consulta[3]; ?>;
+                                  var longitudreporte=<?php echo $consulta[4]; ?>;
+                                  var descripcion="<?php echo $consulta[5]; ?>";
+                                  var posicion=new google.maps.LatLng(latitudreporte,longitudreporte);
+                                  var contenido='<h1>Nombre: '+ nombrereporte +'</h1>'+
+                                  '<h2>Descripci&oacute;n: '+ descripcion +'</h2>';
+
+                                  var geolocateReports = new google.maps.Marker({
+                                    position:posicion,
+                                    map: map,
+                                    info: contenido
+                                  });
+
+                                  var infoWindow = new google.maps.InfoWindow({
+                                    content:contenido
+                                  });
+
+                                  google.maps.event.addListener(geolocateReports, 'click', function(){
+                                    infoWindow.setContent( this.info );
+                                    infoWindow.open( map, this );
+                                  });
+                                <?php
+                              } }
+                              mysqli_free_result($res);
+                              ?>
+
+                      });
+                    }else {
+                      document.getElementById("google_canvas").innerHTML="No Soportado";
+                    }
+                  }());;
+
+
         </script>
 
     </body>
