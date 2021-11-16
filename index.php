@@ -29,25 +29,28 @@
             #nuevo_reporte a img:hover{
                width: 260px;
             }
+            #cuerpo{
+                width: auto;
+                min-height: 100%;
+            }
         </style>
     </head>
     <body>
-        <div><?php $nameu ?></div>
-	<center>
-		<h1> <br> <img src = "imagenes/recursos/logo.png" width="60px" height="60px">
-			<img src = "imagenes/recursos/Report.jpg" width="100px" height="60px">
-			<img src = "imagenes/recursos/Thing.png" width="120px" height="60px"></h1>
-		<h4>ReporThing es una plataforma en la cual se busca ayudar a mantener informadas a las personas
-		<br> acerca de distintos sucesos peligrosos o interesantes en su entorno</h4>
+    <div id="cuerpo">    
+	    <center>
+		    <h1> <br> <img src = "imagenes/recursos/logo.png" width="60px" height="60px">
+		    	<img src = "imagenes/recursos/Report.jpg" width="100px" height="60px">
+		    	<img src = "imagenes/recursos/Thing.png" width="120px" height="60px"></h1>
+		    <h4>ReporThing es una plataforma en la cual se busca ayudar a mantener informadas a las personas
+		    <br> acerca de distintos sucesos peligrosos o interesantes en su entorno</h4>
+        </center>
         <br>
-    </center>
-    <br>
-    <div id="nuevo_reporte">
-    <a href="nuevoReporte.php">
-        <img class="imagen"src="./imagenes/recursos/Nuevo_reporte.png">
-    </a>
+        <div id="nuevo_reporte">
+        <a href="nuevoReporte.php">
+            <img class="imagen"src="./imagenes/recursos/Nuevo_reporte.png">
+        </a>
+        </div>
     </div>
-    <br><br><br><br>
     <?php require "footer.php"; ?>
     </body>
 </html>
