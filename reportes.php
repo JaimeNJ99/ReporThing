@@ -7,7 +7,7 @@
     <head>
         <title>Reportes</title>
         <script src="JavaScript/jquery-3.6.0.min.js"></script>
-        <script>
+        <script> 
             function rating(id){
                 var calif = $('#calif'+id).val();
                 //window.location.href = 'funciones/rating.php?calificacion='+calif+'&id='+id;
