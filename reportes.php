@@ -1,7 +1,7 @@
 <?php
     require "header.php";
     $zona = 0;
-    $tipo = 0;
+    //$tipo = 1;
 ?>
 <html>
     <head>
@@ -10,7 +10,7 @@
         <script> 
             function rating(id){
                 var calif = $('#calif'+id).val();
-                //window.location.href = 'funciones/rating.php?calificacion='+calif+'&id='+id;
+                
                 if(calif != ''){
                     $.ajax({
 					    url       : 'funciones/rating.php?calificacion='+calif+'&id='+id, 
@@ -26,6 +26,10 @@
 					});
                 }
             } 
+
+            function cambioTipo(tipo){
+                window.location.href =  "reportes.php?tipo="+tipo; 
+            }
         </script>
         <style>
             .centro{
@@ -114,9 +118,9 @@
                 ?>
                 <div class="entrada">
                     <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
-                    <div class="texto">Ubicación:<br><?php echo $consulta[3]; ?></div>
+                    <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
                     <p>Descripción: </p>
-                    <div class="texto"><div class="descripcion"><?php echo $consulta[4]; ?></div></div>
+                    <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
                     <br>Calificalo: 
                     <input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
                     <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)">
@@ -145,6 +149,7 @@
             <div class="tabla">
                 <div class="titulotabla"><h1>Más votados</h1></div>
                 <?php 
+                    //CAMBIAR ESTA CONSULTA
                     $sql = "SELECT * FROM reportes WHERE id_reporte IN
                     (SELECT id_reporte FROM rating ORDER BY calificacion  ASC)  LIMIT 10";
                     $res = mysqli_query($conn, $sql);
@@ -159,9 +164,9 @@
                 ?>
                 <div class="entrada">
                     <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
-                    <div class="texto">Ubicación:<br><?php echo $consulta[3]; ?></div>
+                    <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
                     <p>Descripción: </p>
-                    <div class="texto"><div class="descripcion"><?php echo $consulta[4]; ?></div></div>
+                    <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
                     <br>Calificalo: 
                     <input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
                     <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)">
@@ -205,9 +210,9 @@
                 ?>
                <div class="entrada">
                     <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
-                    <div class="texto">Ubicación:<br><?php echo $consulta[3]; ?></div>
+                    <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
                     <p>Descripción: </p>
-                    <div class="texto"><div class="descripcion"><?php echo $consulta[4]; ?></div></div>
+                    <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
                     <br>Calificalo: 
                     <input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
                     <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)">
@@ -234,11 +239,11 @@
                 ?>
             </div>
         </div>
-<!-- ////////////////////////////////////////////////////////////////////////////////////////////
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////
 
                 CODIGO DE CATEGORIAS
 
-//////////////////////////////////////////////////////////////////////////////////////////////////-->
+/////////////////////////////////////////////////////////////////////////////////////////////-->
         <br>    
         <div><h1 style="text-align:center">Categorias</h1></div>
         <br>
@@ -247,13 +252,21 @@
             <div class="titulotabla">
                 <h1>Categorías</h1>
                 <div>
-                    <input type="radio" id="categoria1" value="1" name="categoria_seleccionada">
+                    <?php 
+                        if (isset($_GET["tipo"])){
+                            $tipo = $_GET["tipo"];
+                        }
+                        else{
+                            $tipo = 1;
+                        }
+                    ?>
+                    <input type="radio" id="categoria1" value="1" name="categoria_seleccionada" onclick="cambioTipo(1);" <?php if ($tipo == 1){ echo "checked";} ?>>
                     <label for="categoria1">tipo1</label>
-                    <input type="radio" id="categoria2" value="2" name="categoria_seleccionada">
+                    <input type="radio" id="categoria2" value="2" name="categoria_seleccionada" onclick="cambioTipo(2);" <?php if ($tipo == 2){ echo "checked";} ?>>
                     <label for="categoria2">tipo2</label>
-                    <input type="radio" id="categoria3" value="3" name="categoria_seleccionada">
+                    <input type="radio" id="categoria3" value="3" name="categoria_seleccionada" onclick="cambioTipo(3);" <?php if ($tipo == 3){ echo "checked";} ?>>
                     <label for="categoria3">tipo3</label>
-                    <input type="radio" id="categoria4" value="4" name="categoria_seleccionada">
+                    <input type="radio" id="categoria4" value="4" name="categoria_seleccionada" onclick="cambioTipo(4);" <?php if ($tipo == 4){ echo "checked";} ?>>
                     <label for="categoria4">tipo4</label>
                 </div>
             </div>
@@ -261,12 +274,13 @@
 
             </script>
             <?php 
-                    $sql = "SELECT * FROM reportes ORDER BY id_reporte DESC LIMIT 3";
+                    
+                    $sql = "SELECT * FROM reportes WHERE tipo = $tipo";
                     $res = mysqli_query($conn, $sql);
                     $row = mysqli_num_rows($res);
                     if($row == 0){ ?>
                         <div class="entrada">
-                            <b>Todavia no hay reportes cerca de ti</b>
+                            <b>Todavia no hay reportes de este tipo</b>
                         </div>
                     <?php }else{
                         for($i = 0; $i < $row; $i++){
@@ -274,9 +288,9 @@
                 ?>
                <div class="entrada">
                     <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
-                    <div class="texto">Ubicación:<br><?php echo $consulta[3]; ?></div>
+                    <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
                     <p>Descripción: </p>
-                    <div class="texto"><div class="descripcion"><?php echo $consulta[4]; ?></div></div>
+                    <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
                     <br>Calificalo: 
                     <input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
                     <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)">
@@ -302,184 +316,6 @@
                 mysqli_free_result($res);
                 ?>
         </div>
-        <!-- 
-        <div class="centro">
-        <div class="categorias">
-                <div class="titulotabla"><h1>categoria</h1></div>
-                <?php 
-                    $sql = "SELECT * FROM reportes
-                    WHERE tipo = $tipo 
-                    ORDER BY id_reporte DESC LIMIT 10";
-                    $res = mysqli_query($conn, $sql);
-                    $row = mysqli_num_rows($res);
-                    if($row == 0){ ?>
-                        <div class="entrada">
-                            <b>Todavia no hay reportes </b>
-                        </div>
-                    <?php }else{
-                        for($i = 0; $i < $row; $i++){
-                            $consulta = mysqli_fetch_row($res);
-                ?>
-                <div class="entrada">
-                    <b>Nombre del reporte <?php echo $consulta[1]; ?>
-                    <br>Ubicación <?php echo $consulta[3]; ?>
-                    <br>Descripción <?php echo $consulta[4]; ?>
-                    <br>Calificalo: 
-                    <select name="rating" onchange="if (this.selectedIndex) rating();">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    </b>
-                </div>
-                <?php     
-                } }
-                mysqli_free_result($res);
-                ?>
-            </div>
-            <div class="categorias">
-                <div class="titulotabla"><h1>categoria</h1></div>
-                <?php 
-                    $sql = "SELECT * FROM reportes
-                    WHERE tipo = $tipo 
-                    ORDER BY id_reporte DESC LIMIT 10";
-                    $res = mysqli_query($conn, $sql);
-                    $row = mysqli_num_rows($res);
-                    if($row == 0){ ?>
-                        <div class="entrada">
-                            <b>Todavia no hay reportes </b>
-                        </div>
-                    <?php }else{
-                        for($i = 0; $i < $row; $i++){
-                            $consulta = mysqli_fetch_row($res);
-                ?>
-                <div class="entrada">
-                    <b>Nombre del reporte <?php echo $consulta[1]; ?>
-                    <br>Ubicación <?php echo $consulta[3]; ?>
-                    <br>Descripción <?php echo $consulta[4]; ?>
-                    <br>Calificalo: 
-                    <select name="rating" onchange="if (this.selectedIndex) rating();">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    </b>
-                </div>
-                <?php     
-                } }
-                mysqli_free_result($res);
-                ?>
-            </div>
-            <div class="categorias">
-                <div class="titulotabla"><h1>categoria</h1></div>
-                <?php 
-                    $sql = "SELECT * FROM reportes
-                    WHERE tipo = $tipo 
-                    ORDER BY id_reporte DESC LIMIT 10";
-                    $res = mysqli_query($conn, $sql);
-                    $row = mysqli_num_rows($res);
-                    if($row == 0){ ?>
-                        <div class="entrada">
-                            <b>Todavia no hay reportes </b>
-                        </div>
-                    <?php }else{
-                        for($i = 0; $i < $row; $i++){
-                            $consulta = mysqli_fetch_row($res);
-                ?>
-                <div class="entrada">
-                    <b>Nombre del reporte <?php echo $consulta[1]; ?>
-                    <br>Ubicación <?php echo $consulta[3]; ?>
-                    <br>Descripción <?php echo $consulta[4]; ?>
-                    <br>Calificalo: 
-                    <select name="rating" onchange="if (this.selectedIndex) rating();">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    </b>
-                </div>
-                <?php     
-                } }
-                mysqli_free_result($res);
-                ?>
-            </div>
-            <div class="categorias">
-                <div class="titulotabla"><h1>categoria</h1></div>
-                <?php 
-                    $sql = "SELECT * FROM reportes
-                    WHERE tipo = $tipo 
-                    ORDER BY id_reporte DESC LIMIT 10";
-                    $res = mysqli_query($conn, $sql);
-                    $row = mysqli_num_rows($res);
-                    if($row == 0){ ?>
-                        <div class="entrada">
-                            <b>Todavia no hay reportes </b>
-                        </div>
-                    <?php }else{
-                        for($i = 0; $i < $row; $i++){
-                            $consulta = mysqli_fetch_row($res);
-                ?>
-                <div class="entrada">
-                    <b>Nombre del reporte <?php echo $consulta[1]; ?>
-                    <br>Ubicación <?php echo $consulta[3]; ?>
-                    <br>Descripción <?php echo $consulta[4]; ?>
-                    <br>Calificalo: 
-                    <select name="rating" onchange="if (this.selectedIndex) rating();">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    </b>
-                </div>
-                <?php     
-                } }
-                mysqli_free_result($res);
-                ?>
-            </div>
-            <div class="categorias">
-                <div class="titulotabla"><h1>categoria</h1></div>
-                <?php 
-                    $sql = "SELECT * FROM reportes
-                    WHERE tipo = $tipo 
-                    ORDER BY id_reporte DESC LIMIT 10";
-                    $res = mysqli_query($conn, $sql);
-                    $row = mysqli_num_rows($res);
-                    if($row == 0){ ?>
-                        <div class="entrada">
-                            <b>Todavia no hay reportes </b>
-                        </div>
-                    <?php }else{
-                        for($i = 0; $i < $row; $i++){
-                            $consulta = mysqli_fetch_row($res);
-                ?>
-                <div class="entrada">
-                    <b>Nombre del reporte <?php echo $consulta[1]; ?>
-                    <br>Ubicación <?php echo $consulta[3]; ?>
-                    <br>Descripción <?php echo $consulta[4]; ?>
-                    <br>Calificalo: 
-                    <select name="rating" onchange="if (this.selectedIndex) rating();">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    </b>
-                </div>
-                <?php     
-                } }
-                mysqli_free_result($res);
-                ?> 
-            </div>
-        </div> -->
         <?php require "footer.php" ?>
     </body>
 </html>

@@ -29,7 +29,7 @@
     $res2 = mysqli_query($conn, $sql);
 
     if(!$res || !$res2){
-        echo "No se ha podido insertar " . mysqli_errno($conn);
+        echo "No se ha podido insertar " . mysqli_errno($conn); 
         return;
     }
 

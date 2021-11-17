@@ -1,10 +1,12 @@
 <?php
     require "conexion.php";
     $conn = conexion();
-    if($idu){
-       $id_usuario = $idu; //si sesion iniciada
+    session_start();
+
+    if($_SESSION["idu"]){
+       $id_usuario = $_SESSION["idu"]; //si sesion iniciada
     }else{
-        $id_usuario = '00'+time(); //si usuario anonimo
+        $id_usuario = time(); //si usuario anonimo
     }
     $calificacion = $_REQUEST['calificacion'];
     $id_reporte = $_REQUEST['id'];
