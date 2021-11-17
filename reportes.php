@@ -1,6 +1,6 @@
 <?php
     require "header.php";
-    $zona = 0;
+    $zona = 1;
     //$tipo = 1;
 ?>
 <html>
@@ -70,6 +70,11 @@
                 border: 1px solid #000;
                 text-align: center;
             }
+            .titulotabla div h1{
+                width: auto;
+                height: auto;
+                background-color: silver;
+            }
             .entrada{
                 text-align: center;
                 width: 98%;
@@ -115,10 +120,14 @@
                     <?php }else{
                         for($i = 0; $i < $row; $i++){
                             $consulta = mysqli_fetch_row($res);
+                            $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
+                            $tipores = mysqli_query($conn, $sql);
+                            $tipoConsulta = mysqli_fetch_row($tipores);
                 ?>
                 <div class="entrada">
                     <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
                     <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
+                    <div class="texto">Tipo de reporte:<br><?php echo $tipoConsulta[0]; ?></div>
                     <p>Descripción: </p>
                     <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
                     <br>Calificalo: 
@@ -144,6 +153,7 @@
                 <?php     
                 } }
                 mysqli_free_result($res);
+                mysqli_free_result($tipores);
                 ?>
             </div>
             <div class="tabla">
@@ -161,10 +171,14 @@
                     <?php }else{
                         for($i = 0; $i < $row; $i++){
                             $consulta = mysqli_fetch_row($res);
+                            $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
+                            $tipores = mysqli_query($conn, $sql);
+                            $tipoConsulta = mysqli_fetch_row($tipores);
                 ?>
                 <div class="entrada">
                     <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
                     <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
+                    <div class="texto">Tipo de reporte:<br><?php echo $tipoConsulta[0]; ?></div>
                     <p>Descripción: </p>
                     <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
                     <br>Calificalo: 
@@ -190,6 +204,7 @@
                 <?php     
                 } }
                 mysqli_free_result($res);
+                mysqli_free_result($tipores);
                 ?>
             </div>
             <div class="tabla">
@@ -207,10 +222,14 @@
                     <?php }else{
                         for($i = 0; $i < $row; $i++){
                             $consulta = mysqli_fetch_row($res);
+                            $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
+                            $tipores = mysqli_query($conn, $sql);
+                            $tipoConsulta = mysqli_fetch_row($tipores);
                 ?>
                <div class="entrada">
                     <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
                     <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
+                    <div class="texto">Tipo de reporte:<br><?php echo $tipoConsulta[0]; ?></div>
                     <p>Descripción: </p>
                     <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
                     <br>Calificalo: 
@@ -236,6 +255,7 @@
                 <?php     
                 } }
                 mysqli_free_result($res);
+                //mysqli_free_result($tipores);
                 ?>
             </div>
         </div>
@@ -250,24 +270,30 @@
         
         <div class="categorias">
             <div class="titulotabla">
-                <h1>Categorías</h1>
+                <?php 
+                    if (isset($_GET["tipo"])){
+                        $tipo = $_GET["tipo"];
+                    }
+                    else{
+                        $tipo = 1;
+                    }
+                    $sql = "SELECT nombre, descripcion FROM tipos WHERE id_tipos = $tipo";
+                    $resTipo = mysqli_query($conn,$sql);
+                    $consultaTipo = mysqli_fetch_row($resTipo);
+                ?>
+                <h1><?php echo $consultaTipo[0]; ?></h1>
+                <h2><?php echo $consultaTipo[1]; ?></h2>
                 <div>
-                    <?php 
-                        if (isset($_GET["tipo"])){
-                            $tipo = $_GET["tipo"];
-                        }
-                        else{
-                            $tipo = 1;
-                        }
-                    ?>
                     <input type="radio" id="categoria1" value="1" name="categoria_seleccionada" onclick="cambioTipo(1);" <?php if ($tipo == 1){ echo "checked";} ?>>
-                    <label for="categoria1">tipo1</label>
+                    <label for="categoria1">Asalto</label>
                     <input type="radio" id="categoria2" value="2" name="categoria_seleccionada" onclick="cambioTipo(2);" <?php if ($tipo == 2){ echo "checked";} ?>>
-                    <label for="categoria2">tipo2</label>
+                    <label for="categoria2">Accidente</label>
                     <input type="radio" id="categoria3" value="3" name="categoria_seleccionada" onclick="cambioTipo(3);" <?php if ($tipo == 3){ echo "checked";} ?>>
-                    <label for="categoria3">tipo3</label>
+                    <label for="categoria3">Acoso</label>
                     <input type="radio" id="categoria4" value="4" name="categoria_seleccionada" onclick="cambioTipo(4);" <?php if ($tipo == 4){ echo "checked";} ?>>
-                    <label for="categoria4">tipo4</label>
+                    <label for="categoria4">Precaución</label>
+                    <input type="radio" id="categoria4" value="5" name="categoria_seleccionada" onclick="cambioTipo(5);" <?php if ($tipo == 5){ echo "checked";} ?>>
+                    <label for="categoria4">Otro</label>
                 </div>
             </div>
             <script>
@@ -285,10 +311,14 @@
                     <?php }else{
                         for($i = 0; $i < $row; $i++){
                             $consulta = mysqli_fetch_row($res);
+                            $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
+                            $tipores = mysqli_query($conn, $sql);
+                            $tipoConsulta = mysqli_fetch_row($tipores);
                 ?>
                <div class="entrada">
                     <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
                     <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
+                    <div class="texto">Tipo de reporte:<br><?php echo $tipoConsulta[0]; ?></div>
                     <p>Descripción: </p>
                     <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
                     <br>Calificalo: 
@@ -314,6 +344,7 @@
                 <?php     
                 } }
                 mysqli_free_result($res);
+                mysqli_free_result($tipores);
                 ?>
         </div>
         <?php require "footer.php" ?>

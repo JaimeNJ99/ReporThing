@@ -90,8 +90,11 @@
                 <div class="columna"><label>Tipo: </label></div><br>
                 <div class="columna"><select name="tipo" id="tipo">
                   <option value="0"> Selecciona</option>
-                  <option value="1"> Evento</option>
-                  <option value="2"> Crimen</option>
+                  <option value="1"> Asalto</option>
+                  <option value="2"> Accidente</option>
+                  <option value="3"> Acoso</option>
+                  <option value="4"> Precaución</option>
+                  <option value="5"> Otro</option>
                 </select></div><br><br>
                 <div class="columna"><label>Descripci&oacute;n:</label><br>
                 <textarea id="descripcion" class="descripcion" name="descripcion" rows="8" cols="25"></textarea></div><br>
