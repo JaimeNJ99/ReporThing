@@ -4,7 +4,7 @@
     if(!$idu){
       $id = time();
     }else{
-      $id = $idu;
+      $id = '00'+$idu;
     }
 ?>
 <html>
