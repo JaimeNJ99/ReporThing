@@ -22,9 +22,9 @@
                 //tomamos las variables del formulario
                 var titulo = registro.title.value;
                 var tipo = registro.tipo.value;
-                var descripcion = registro.descripcion.value;
                 var longitud = registro.longitud.value;
                 var latitud= registro.latitud.value;
+                var descripcion = registro.descripcion.value;
 
                 if(titulo == '' || tipo == 0 || descrip == '' || longitu == ''|| latitu == ''){ //si faltan campos
                     $('#mensaje').html('Faltan campos por llenar.');
@@ -52,7 +52,7 @@
                 margin-left: auto;
                 text-align: center;
                 display: flexbox;
-               
+
             }
             .error{
                 color: FF0000;
