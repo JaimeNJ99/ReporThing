@@ -2,6 +2,7 @@
     require "header.php";
     $zona = 1;
     //$tipo = 1;
+    $admin = $_SESSION['admin'];
 ?>
 <html>
     <head>
@@ -29,6 +30,21 @@
 
             function cambioTipo(tipo){
                 window.location.href =  "reportes.php?tipo="+tipo; 
+            }
+
+            function eliminaAdmin(id){
+                $.ajax({
+                    url         : 'funciones/Adminelimina.php?id='+id,
+                    type        : 'post',
+                    dataType    : 'text',
+                    success     : function(res){
+                        if(res == 0){
+                            $('#mensaje'+id).html('No se pudo eliminar');
+                        }else{
+                            $('#mensaje'+id).html('Reporte eliminado');
+                        }
+                    }
+                });
             }
         </script>
         <style>
@@ -63,7 +79,7 @@
                 overflow-y: scroll;
             }
             .titulotabla{
-                background-color:steelblue;
+                background-color: skyblue;
                 height: auto;
                 min-height: 50px;
                 width: 98%;
@@ -101,16 +117,27 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            .texto input{
+                margin-left: auto;
+                margin-right: auto;
+                <?php
+                    if($admin == 0){
+                        echo 'display: none;';
+                    }
+                ?>
+            }
         </style>
     </head>
 
     <body>
+       <br> 
         <div><h1 style="text-align:center">Reportes</h1></div>
+        <br>
         <div class="centro">
             <div class="tabla">
                 <div class="titulotabla"><h1>Reportes recientes</h1></div>
                 <?php 
-                    $sql = "SELECT * FROM reportes ORDER BY id_reporte DESC LIMIT 10";
+                    $sql = "SELECT * FROM reportes WHERE estatus = 1 ORDER BY id_reporte DESC LIMIT 20";
                     $res = mysqli_query($conn, $sql);
                     $row = mysqli_num_rows($res);
                     if($row == 0){ ?>
@@ -149,70 +176,89 @@
                             mysqli_free_result($resCalif);
                         ?>
                     </div>
+                    <div class="texto">
+                        <input class= "admin" type="submit" value="Eliminar" onclick="eliminaAdmin(<?php echo $consulta[0]; ?>)">
+                    </div>
                 </div>
+               
                 <?php     
-                } }
+                } mysqli_free_result($tipores); 
+                }
                 mysqli_free_result($res);
-                mysqli_free_result($tipores);
                 ?>
             </div>
             <div class="tabla">
                 <div class="titulotabla"><h1>Más votados</h1></div>
                 <?php 
-                    //CAMBIAR ESTA CONSULTA
-                    $sql = "SELECT * FROM reportes WHERE id_reporte IN
-                    (SELECT id_reporte FROM rating ORDER BY calificacion  ASC)  LIMIT 10";
-                    $res = mysqli_query($conn, $sql);
-                    $row = mysqli_num_rows($res);
+                    //Consulta los 20 reportes más votados
+                    $sql = "SELECT AVG(rating.calificacion),id_reporte FROM rating 
+                        GROUP by id_reporte ORDER BY AVG(calificacion) DESC LIMIT 20";
+                    $resAVG = mysqli_query($conn, $sql);
+                    $row = mysqli_num_rows($resAVG);
+                    
                     if($row == 0){ ?>
                         <div class="entrada">
                             <b>Todavia no se ha calificado algun reporte</b>
                         </div>
                     <?php }else{
                         for($i = 0; $i < $row; $i++){
-                            $consulta = mysqli_fetch_row($res);
-                            $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
-                            $tipores = mysqli_query($conn, $sql);
-                            $tipoConsulta = mysqli_fetch_row($tipores);
-                ?>
-                <div class="entrada">
-                    <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
-                    <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
-                    <div class="texto">Tipo de reporte:<br><?php echo $tipoConsulta[0]; ?></div>
-                    <p>Descripción: </p>
-                    <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
-                    <br>Calificalo: 
-                    <input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
-                    <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)">
-                    <div id="mensaje<?php echo $consulta[0]; ?>" 
-                        style="width: 100%; height: auto; color:skyblue;"></div>
-                    <div class="texto">Calificación:
+                            //toma el id del siguiente reporte más votado
+                            $avg = mysqli_fetch_row($resAVG);
+                            //
+                            $sql = "SELECT * FROM reportes WHERE id_reporte = $avg[1]
+                                    AND estatus = 1";
+                            $res = mysqli_query($conn, $sql);
+                            $row1 = mysqli_num_rows($res);
+                            for($j = 0; $j < $row1; $j++){
+                                $consulta = mysqli_fetch_row($res);
+                                $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
+                                $tipores = mysqli_query($conn, $sql);
+                                $tipoConsulta = mysqli_fetch_row($tipores);
+                    ?>
+                    <div class="entrada">
+                        <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
+                        <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
+                        <div class="texto">Tipo de reporte:<br><?php echo $tipoConsulta[0]; ?></div>
+                        <p>Descripción: </p>
+                        <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
+                        <br>Calificalo: 
+                        <input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
+                        <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)">
+                        <div id="mensaje<?php echo $consulta[0]; ?>" 
+                                style="width: 100%; height: auto; color:skyblue;"></div>
+                        <div class="texto">Calificación:
                         <?php 
                             
-                            $sqlCalif = "SELECT AVG(calificacion) FROM rating WHERE id_reporte = '$consulta[0]'";
-                            $resCalif = mysqli_query($conn, $sqlCalif);
-                            $consultaCalif = mysqli_fetch_row($resCalif);
-                            if($consultaCalif[0] != ''){
-                                echo $consultaCalif[0];
-                            }else{
-                                echo "Sin calificación"; 
-                            }
-                            mysqli_free_result($resCalif);
+                                $sqlCalif = "SELECT AVG(calificacion) FROM rating WHERE id_reporte = '$consulta[0]'";
+                                $resCalif = mysqli_query($conn, $sqlCalif);
+                                $consultaCalif = mysqli_fetch_row($resCalif);
+                                if($consultaCalif[0] != ''){
+                                    echo $consultaCalif[0];
+                                }else{
+                                    echo "Sin calificación"; 
+                                }
+                                mysqli_free_result($resCalif);
                         ?>
+                                </div>
+                    <div class="texto">
+                        <input class= "admin" type="submit" value="Eliminar" onclick="eliminaAdmin(<?php echo $consulta[0]; ?>)">
                     </div>
                 </div>
-                <?php     
-                } }
-                mysqli_free_result($res);
-                mysqli_free_result($tipores);
+                <?php
+                                mysqli_free_result($tipores); 
+                            } 
+                            mysqli_free_result($res);
+                        }
+                   
+                }
+                mysqli_free_result($resAVG);
+                
                 ?>
-            </div>
+            </div> 
             <div class="tabla">
                 <div class="titulotabla"><h1>Cerca a tu zona</h1></div>
                 <?php 
-                    $sql = "SELECT * FROM reportes WHERE id_reporte = 
-                    (SELECT id_reporte FROM zona WHERE id_zona = $zona 
-                    ORDER BY id_reporte DESC LIMIT 10)";
+                    $sql = "SELECT * FROM reportes WHERE id_reporte = 0 AND estatus = 1";
                     $res = mysqli_query($conn, $sql);
                     $row = mysqli_num_rows($res);
                     if($row == 0){ ?>
@@ -251,11 +297,15 @@
                             mysqli_free_result($resCalif);
                         ?>
                     </div>
+                    <div class="texto">
+                        <input class= "admin" type="submit" value="Eliminar" onclick="eliminaAdmin(<?php echo $consulta[0]; ?>)">
+                    </div>
                 </div>
                 <?php     
-                } }
+                        } mysqli_free_result($tipores);
+                    }
                 mysqli_free_result($res);
-                //mysqli_free_result($tipores);
+                //
                 ?>
             </div>
         </div>
@@ -277,7 +327,7 @@
                     else{
                         $tipo = 1;
                     }
-                    $sql = "SELECT nombre, descripcion FROM tipos WHERE id_tipos = $tipo";
+                    $sql = "SELECT nombre, descripcion FROM tipos WHERE id_tipos = $tipo ";
                     $resTipo = mysqli_query($conn,$sql);
                     $consultaTipo = mysqli_fetch_row($resTipo);
                 ?>
@@ -301,14 +351,14 @@
             </script>
             <?php 
                     
-                    $sql = "SELECT * FROM reportes WHERE tipo = $tipo";
-                    $res = mysqli_query($conn, $sql);
-                    $row = mysqli_num_rows($res);
-                    if($row == 0){ ?>
-                        <div class="entrada">
-                            <b>Todavia no hay reportes de este tipo</b>
-                        </div>
-                    <?php }else{
+                $sql = "SELECT * FROM reportes WHERE tipo = $tipo AND estatus = 1";
+                $res = mysqli_query($conn, $sql);
+                $row = mysqli_num_rows($res);
+                if($row == 0){ ?>
+                    <div class="entrada">
+                        <b>Todavia no hay reportes de este tipo</b>
+                    </div>
+                <?php }else{
                         for($i = 0; $i < $row; $i++){
                             $consulta = mysqli_fetch_row($res);
                             $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
@@ -340,11 +390,15 @@
                             mysqli_free_result($resCalif);
                         ?>
                     </div>
+                    <div class="texto">
+                        <input class= "admin" type="submit" value="Eliminar" onclick="eliminaAdmin(<?php echo $consulta[0]; ?>)">
+                    </div>
                 </div>
                 <?php     
-                } }
+                    } mysqli_free_result($tipores); 
+                }
+                
                 mysqli_free_result($res);
-                mysqli_free_result($tipores);
                 ?>
         </div>
         <?php require "footer.php" ?>
