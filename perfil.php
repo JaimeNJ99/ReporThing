@@ -1,5 +1,6 @@
 <?php 
     require "header.php";
+  
     
     $sql = "SELECT * FROM reportes WHERE reportes.id_reporte IN 
         (SELECT reportes_realizados.id_reporte FROM reportes_realizados WHERE id_usuario = $idu)";
@@ -120,32 +121,25 @@
                     for($i=0;$i < $row; $i++){
                         $consulta = mysqli_fetch_row($res); //tomamos toda la fila
                         
-                        // asignamos el valor del tipo de reporte
-                        // de numero a texto
-                        switch($consulta[2]){
-                            case 1:
-                                $tipo = '';
-                                break;
-                            case 2:
-                                $tipo = '';
-                                break;
-                            case 3:
-                                $tipo = '';
-                                break;
-                            case 4:
-                                $tipo = '';
-                                break;
-                            default:
-                                $tipo = 'Desconocido';
-                                break;
-                            }
+                        $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
+                        $tipores = mysqli_query($conn, $sql);
+                        $tipoConsulta = mysqli_fetch_row($tipores);
                         ?>
                         <div class="caja">
                             <!--Se muestran todos los datos del reporte -->
                             <h1><?php echo $consulta[1]; ?></h1>
-                            <h3>Tipo: <?php echo $tipo; ?></h3>
-                            <h3>Ubicacion: <?php echo $consulta[3]; ?></h3>
-                            <h3>Descripcion: <?php echo $consulta[4]; ?></h3>
+                            <h3>Tipo: <?php echo $tipoConsulta[0]; ?></h3>
+                            <h3>Ubicacion: <?php echo $consulta[3]; echo $consulta[4]; ?></h3>
+                            <h3>Descripcion: <?php echo $consulta[5]; ?></h3>
+                            <?php 
+                                if($consulta[6] == 1){
+                                    $estatus = "activo";
+                                }else{
+                                    $estatus = "inactivo";
+                                }
+
+                            ?>
+                            <h3>Estatus: <?php echo $estatus; ?> </h3>
                         </div>
                 <?php }
                 } ?>
