@@ -51,12 +51,12 @@
             <h1>Información General</h1>
 	    <div class="grafica1">
 	    <div id="Grafica1"></div>
-            <div class="titulog"><label>Grafica de Pastel - Reportes</label></div>
+            <div class="titulog"><label>Grafica de Pastel - Numero de Reportes</label></div>
 	    </div>
             <div class="grafica2">
 	    <div id="Grafica2">>/div>
 	    </div>
-	    <div class="titulog"><label>Grafica de barras - Zonas donde hay mas reportes</label></div>
+	    <div class="titulog"><label>Grafica de barras - Rating de Reportes</label></div>
 
         </div>
     </body>
