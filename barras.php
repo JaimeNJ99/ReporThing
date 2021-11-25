@@ -2,10 +2,14 @@
     require "funciones/conexion.php";
     $conn = conexion(); //conexion a la BD
 
-     $sql1="SELECT calificacion, Re.titulo FROM rating R, reportes RE WHERE R.id_reporte = Re.id_reporte";
+    //$sql1="SELECT AVG(R.calificacion), RE.titulo FROM rating R, reportes RE WHERE R.id_reporte = RE.id_reporte";
+    $sql1 = "SELECT AVG(rating.calificacion),id_reporte FROM rating 
+    GROUP by id_reporte";
+    
     $result1=mysqli_query($conn,$sql1);
     $valoresY=array(); //tipo1
     $valoresX=array(); //tipo2
+  
     
     while($ver=mysqli_fetch_row($result1)) {
         $valoresY[]=$ver[0];
