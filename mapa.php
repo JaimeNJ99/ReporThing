@@ -17,6 +17,7 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUkFLr3FhXywsglhyFSpg1CitJHWRh_dQ&callback=initMap&libraries=&v=weekly"></script>>
 
     </script>
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>
         <script>
             function registrar(){
                 //tomamos las variables del formulario
@@ -106,7 +107,7 @@
                 var longitud=position.coords.longitude;
                 document.getElementById("longitud").value=longitud;
                         map.setCenter(geolocate);
-
+                
                       <?php
                           $sql = "SELECT * FROM reportes ORDER BY id_reporte DESC LIMIT 10";
                           $res = mysqli_query($conn, $sql);
@@ -143,8 +144,78 @@
                                 <?php
                               } }
                               mysqli_free_result($res);
-                              ?>
 
+                              $sql = "SELECT * FROM zona GROUP by id_zona";
+                              $resZona = mysqli_query($conn, $sql);
+                              $rows = mysqli_num_rows($resZona);
+                              if($rows != 0){
+                             for($i = 0; $i < $rows; $i++){}}
+
+                              ?>
+                          //////////////// geometrias
+                        var vertices = [
+                            {lat: 20.613377, lng: -103.395842},
+                            {lat: 20.636385, lng: -103.307237},
+                            {lat: 20.694670, lng: -103.269753},
+                            {lat: 20.740587, lng: -103.309156},
+                            {lat: 20.709887, lng: -103.406395}
+                        ];
+                        var guadalajara = new google.maps.Polygon({
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(255, 0, 0)',
+                        fillColor: 'rgb(255, 255, 0)',
+                        strokeWeight: 4,
+                        });
+
+                        var vertices = [
+                          {lat: 20.613377, lng: -103.395842},
+                          {lat: 20.589646, lng: -103.420527},
+                          {lat: 20.553967, lng: -103.350489},
+                          {lat: 20.604751, lng: -103.258135},
+                          {lat: 20.636385, lng: -103.307237}
+                        ];
+                        var tlaquepaque = new google.maps.Polygon({
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(255, 0, 0)',
+                        fillColor: 'rgb(255, 255, 0)',
+                        strokeWeight: 4,
+                        });
+
+                        var vertices = [
+                          {lat: 20.609627, lng: -103.479527},
+                          {lat: 20.747102, lng: -103.441075},
+                          {lat: 20.773427, lng: -103.342884},
+                          {lat: 20.740587, lng: -103.309156}, //
+                          {lat: 20.709887, lng: -103.406395},
+                          {lat: 20.613377, lng: -103.395842}
+                          
+                        ];
+                        var zapopan = new google.maps.Polygon({
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(255, 0, 0)',
+                        fillColor: 'rgb(255, 255, 0)',
+                        strokeWeight: 4,
+                        });
+                        
+                        var vertices = [
+                          {lat: 20.694670, lng: -103.269753},
+                          {lat: 20.667243, lng: -103.198343},
+                          {lat: 20.579684, lng: -103.226229},
+                          {lat: 20.636385, lng: -103.307237}
+                          
+                          
+                        ];
+                        var tonala = new google.maps.Polygon({
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(255, 0, 0)',
+                        fillColor: 'rgb(255, 255, 0)',
+                        strokeWeight: 4,
+                        });
+                        
                       });
                     }else {
                       document.getElementById("google_canvas").innerHTML="No Soportado";

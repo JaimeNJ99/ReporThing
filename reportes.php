@@ -8,6 +8,8 @@
     <head>
         <title>Reportes</title>
         <script src="JavaScript/jquery-3.6.0.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUkFLr3FhXywsglhyFSpg1CitJHWRh_dQ&callback=initMap&libraries=&v=weekly"></script>
+        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>
         <script> 
             function rating(id){
                 var calif = $('#calif'+id).val();
@@ -45,6 +47,83 @@
                         }
                     }
                 });
+            }
+            function inicio() {
+                return map = new google.maps.Map(document.getElementById("google_canvas"));
+            }
+            function zona(lat, alt, id, map){
+                var vertices = [
+                    {lat: 20.613377, lng: -103.395842},
+                    {lat: 20.636385, lng: -103.307237},
+                    {lat: 20.694670, lng: -103.269753},
+                    {lat: 20.740587, lng: -103.309156},
+                    {lat: 20.709887, lng: -103.406395}
+                ];
+                var guadalajara = new google.maps.Polygon({
+                    path: vertices,
+                    map: map,
+                });
+
+                var vertices = [
+                    {lat: 20.613377, lng: -103.395842},
+                    {lat: 20.589646, lng: -103.420527},
+                    {lat: 20.553967, lng: -103.350489},
+                    {lat: 20.604751, lng: -103.258135},
+                    {lat: 20.636385, lng: -103.307237}
+                ];
+                var tlaquepaque = new google.maps.Polygon({
+                    path: vertices,
+                    map: map,
+                    });
+
+                var vertices = [
+                    {lat: 20.609627, lng: -103.479527},
+                    {lat: 20.747102, lng: -103.441075},
+                    {lat: 20.773427, lng: -103.342884},
+                    {lat: 20.740587, lng: -103.309156},
+                    {lat: 20.709887, lng: -103.406395},
+                    {lat: 20.613377, lng: -103.395842} 
+                ];
+                var zapopan = new google.maps.Polygon({
+                    path: vertices,
+                    map: map,
+                });
+                        
+                var vertices = [
+                    {lat: 20.694670, lng: -103.269753},
+                    {lat: 20.667243, lng: -103.198343},
+                    {lat: 20.579684, lng: -103.226229},
+                    {lat: 20.636385, lng: -103.307237} 
+                ];
+                var tonala = new google.maps.Polygon({
+                    path: vertices,
+                    map: map,
+                });
+                        
+
+                var posicion = new google.maps.LatLng(lat, alt);
+                var d = document.getElementById("tablaZona");
+                //////////////cambiar a tu ubicación actual////////////////
+                var miZona = new google.maps.LatLng(20.725010, -103.366725);
+                ///////////////////////////////////////////////////////////
+
+                if(google.maps.geometry.poly.containsLocation(posicion, zapopan) == true && google.maps.geometry.poly.containsLocation(miZona, zapopan) != true){
+                        var d_reporte = document.getElementById("zona"+id);
+                        d.removeChild(d_reporte);
+                }else if(google.maps.geometry.poly.containsLocation(posicion, guadalajara) == true && google.maps.geometry.poly.containsLocation(miZona, guadalajara) != true){
+                        var d_reporte = document.getElementById("zona"+id);
+                        d.removeChild(d_reporte);
+                }else if(google.maps.geometry.poly.containsLocation(posicion, tonala) == true && google.maps.geometry.poly.containsLocation(miZona, tonala) != true){
+                        var d_reporte = document.getElementById("zona"+id);
+                        d.removeChild(d_reporte);
+                }else if(google.maps.geometry.poly.containsLocation(posicion, tlaquepaque) == true && google.maps.geometry.poly.containsLocation(miZona, tlaquepaque) != true){
+                        var d_reporte = document.getElementById("zona"+id);
+                        d.removeChild(d_reporte);
+                }
+
+                
+
+                 
             }
         </script>
         <style>
@@ -132,6 +211,7 @@
     <body>
        <br> 
         <div><h1 style="text-align:center">Reportes</h1></div>
+        <div id="google_canvas"  class="google_canvas" ></div>
         <br>
         <div class="centro">
             <div class="tabla">
@@ -255,12 +335,13 @@
                 
                 ?>
             </div> 
-            <div class="tabla">
+            <div class="tabla" id="tablaZona">
                 <div class="titulotabla"><h1>Cerca a tu zona</h1></div>
                 <?php 
-                    $sql = "SELECT * FROM reportes WHERE id_reporte = 0 AND estatus = 1";
+                    $sql = "SELECT * FROM reportes WHERE  estatus = 1";
                     $res = mysqli_query($conn, $sql);
                     $row = mysqli_num_rows($res);
+                    
                     if($row == 0){ ?>
                         <div class="entrada">
                             <b>Todavia no hay reportes cerca de ti</b>
@@ -272,7 +353,9 @@
                             $tipores = mysqli_query($conn, $sql);
                             $tipoConsulta = mysqli_fetch_row($tipores);
                 ?>
-               <div class="entrada">
+                
+                            
+               <div class="entrada" id="zona<?php echo $consulta[0] ?>">
                     <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
                     <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
                     <div class="texto">Tipo de reporte:<br><?php echo $tipoConsulta[0]; ?></div>
@@ -301,6 +384,7 @@
                         <input class= "admin" type="submit" value="Eliminar" onclick="eliminaAdmin(<?php echo $consulta[0]; ?>)">
                     </div>
                 </div>
+                <script type="text/javascript"> zona(<?php echo $consulta[3] ?> , <?php echo $consulta[4] ?> , <?php echo $consulta[0] ?> , inicio());  </script>
                 <?php     
                         } mysqli_free_result($tipores);
                     }
