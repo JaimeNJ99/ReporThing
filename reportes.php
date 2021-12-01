@@ -302,8 +302,8 @@
                         <p>Descripción: </p>
                         <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
                         <br>Calificalo: 
-                        <input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
-                        <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)">
+                        <!--<input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
+                        <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)"> -->
                         <div id="mensaje<?php echo $consulta[0]; ?>" 
                                 style="width: 100%; height: auto; color:skyblue;"></div>
                         <div class="texto">Calificación:
@@ -456,8 +456,8 @@
                     <p>Descripción: </p>
                     <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
                     <br>Calificalo: 
-                    <input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
-                    <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)">
+                    <!--<input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
+                    <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)"> -->
                     <div id="mensaje<?php echo $consulta[0]; ?>" 
                         style="width: 100%; height: auto; color:skyblue;"></div>
                     <div class="texto">Calificación:
