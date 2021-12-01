@@ -109,7 +109,7 @@
                         map.setCenter(geolocate);
                 
                       <?php
-                          $sql = "SELECT * FROM reportes ORDER BY id_reporte DESC LIMIT 10";
+                          $sql = "SELECT * FROM reportes ORDER BY id_reporte DESC LIMIT 30";
                           $res = mysqli_query($conn, $sql);
                           $row = mysqli_num_rows($res);
                           if($row == 0){?>
@@ -163,7 +163,7 @@
                         var guadalajara = new google.maps.Polygon({
                         path: vertices,
                         map: map,
-                        strokeColor: 'rgb(255, 0, 0)',
+                        strokeColor: 'rgb(255,140,0)',
                         fillColor: 'rgb(255, 255, 0)',
                         strokeWeight: 4,
                         });
@@ -178,8 +178,8 @@
                         var tlaquepaque = new google.maps.Polygon({
                         path: vertices,
                         map: map,
-                        strokeColor: 'rgb(255, 0, 0)',
-                        fillColor: 'rgb(255, 255, 0)',
+                        strokeColor: 'rgb(0,139,139)',
+                        fillColor: 'rgb(32,178,170)',
                         strokeWeight: 4,
                         });
 
@@ -195,8 +195,8 @@
                         var zapopan = new google.maps.Polygon({
                         path: vertices,
                         map: map,
-                        strokeColor: 'rgb(255, 0, 0)',
-                        fillColor: 'rgb(255, 255, 0)',
+                        strokeColor: 'rgb(75,0,130)',
+                        fillColor: 'rgb(75,0,130)',
                         strokeWeight: 4,
                         });
                         
@@ -211,8 +211,8 @@
                         var tonala = new google.maps.Polygon({
                         path: vertices,
                         map: map,
-                        strokeColor: 'rgb(255, 0, 0)',
-                        fillColor: 'rgb(255, 255, 0)',
+                        strokeColor: 'rgb(0,100,0)',
+                        fillColor: 'rgb(173,255,47)',
                         strokeWeight: 4,
                         });
                         

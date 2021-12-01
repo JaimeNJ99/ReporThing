@@ -435,7 +435,7 @@
             </script>
             <?php 
                     
-                $sql = "SELECT * FROM reportes WHERE tipo = $tipo AND estatus = 1";
+                $sql = "SELECT * FROM reportes WHERE tipo = $tipo AND estatus = 1 ORDER BY id_reporte DESC LIMIT 100";
                 $res = mysqli_query($conn, $sql);
                 $row = mysqli_num_rows($res);
                 if($row == 0){ ?>
