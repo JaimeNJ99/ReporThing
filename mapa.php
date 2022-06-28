@@ -7,7 +7,7 @@
       $id = $idu; 
     }
 ?>
-<html>
+<html> 
     <head>
     <title>
         Mapa
