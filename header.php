@@ -5,7 +5,7 @@
     $conn = conexion(); //conexion a la BD
 
     //si existe la sesion tomamos el id
-    if($_SESSION["idu"]){
+    if(isset($_SESSION["idu"])){
         $idu     = $_SESSION["idu"];
         $nameu   = $_SESSION["nombre"];
         $correou = $_SESSION["correo"];
@@ -13,7 +13,7 @@
         $avataru = $_SESSION["avatar"];
     }
 
-    if($avataru == ''){
+    if(isset($avataru) && $avataru == ''){
         $avataru = "default.png";
     }
 
@@ -21,8 +21,6 @@
 <html>
     <head>
         <script src="JavaScript/jquery-3.6.0.min.js"></script>
-        
-        
         <style>
             *{
                 margin: 0%;
@@ -32,6 +30,11 @@
                 width:100%;
                 height: 70px;
                 background-color: #87CEFA;
+                position:fixed;
+                z-index: 5;
+            }
+            #bg{
+                height: 110px;
             }
             #logo{
                 width: auto;
@@ -58,7 +61,7 @@
                 margin-right: 30px;
                 margin-top: 5px;
                 border-radius: 50%;
-                <?php if(!$idu){ ?>
+                <?php if(!isset($idu)){ ?>
                     display: none;
                 <?php } ?>
             }
@@ -78,7 +81,7 @@
                 margin-right: 10px;
                 margin-top: 5px;
                 border: 2px solid #F0F8FF;
-                <?php if($idu){ ?>
+                <?php if(isset($idu)){ ?>
                     display: none;
                 <?php } ?>
                 
@@ -141,6 +144,40 @@
                 margin: auto;
                 text-align: center;
             }
+
+            .botonmenu ul{
+                position: absolute;
+                width: 197px;
+                height: auto;
+                top: 130%;
+                left: 61%;
+                display: none;
+                border: 2px solid #000;
+                background-color: #33BAFF;
+            }
+            .botonmenu ul li a{
+                color: #000;
+                text-decoration: none;
+            }
+            .botonmenu ul li a:hover{
+                color: #33BAFF;
+            }
+            .botonmenu ul li {
+                width: 98%;
+                height: 25px;
+                margin: auto;
+                text-align: center;
+                border: 1px solid #000;
+                background-color: #F0F8FF;
+                display: none;
+            }
+            .botonmenu:hover ul{
+                display: block;
+            }
+            .botonmenu:hover ul li{
+                display: block;
+            }
+
         </style>
     </head>
     <body>
@@ -149,6 +186,7 @@
             <div id = "nombreheader">
                 <a href="index.php"><img src = "imagenes/recursos/Reporthing.png" class="logom" ></a>
             </div>
+            <?php if(isset($idu)){ ?>
             <div id = "usuario">
                 <a><img src = "imagenes/avatar/<?php echo $avataru; ?>" id="img"></a>
                 <ul>
@@ -161,15 +199,23 @@
                     <br>
                 </ul>
             </div>
-            
+            <?php } ?>
             <div id = "loginm"><a href="login.php"><img src="imagenes/recursos/login.png"></a></div>
-        </div>
-        <div id = "menu">
+            <div id = "menu">
             <div class ="botonmenu"><a href="index.php">Inicio</a></div>
             <div class ="botonmenu"><a href="nuevoReporte.php">Nuevo Reporte</a></div>
             <div class ="botonmenu"><a href="mapa.php">Mapa</a></div>
-            <div class ="botonmenu"><a href="reportes.php">Reportes</a></div>
+            <div class ="botonmenu"><a style="color:#000;">Reportes</a>
+                <ul>
+                   <li><a href="reportes.php">Reportes recientes</a></li>
+                   <li><a href="reportes_zona.php">Reportes en tu zona</a></li>
+                   <li><a href="reportes_categoria.php">Reportes por categoría</a></li> 
+                </ul>
+            </div>
             <div class ="botonmenu"><a href="graficas.php">Gráficas</a></div>
         </div>
+        
+        </div>
+        <div id="bg"></div>
     </body>
 </html>

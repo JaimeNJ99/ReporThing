@@ -1,10 +1,11 @@
 <?php
     require "header.php";
+    $id = $_GET["val"];
 ?>
 <html> 
     <head>
     <title>
-        Mapa
+        Ver reporte
     </title>
     <script src="JavaScript/jquery-3.6.0.min.js"></script>
     <script> function initMap(){} </script>
@@ -28,13 +29,9 @@
     </head>
     <body>
             <br>
-            <h2 style="text-align: center">Mapa</h2>
-            <br>
             <div id="base"> 
               <br>
-              <div id="google_canvas"  class="google_canvas"></div>   
-              <input type="hidden" id="latitud" name="latitud">
-              <input type="hidden" id="longitud" name="longitud">
+              <div id="google_canvas"  class="google_canvas"></div>
             </div>
         <script type="text/javascript">
         var map;
@@ -47,24 +44,20 @@
               map = new google.maps.Map(document.getElementById("google_canvas"),mapOptions);
               navigator.geolocation.getCurrentPosition(function(position){
                 var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                var latitud=position.coords.latitude;
-                document.getElementById("latitud").value=latitud;
-                var longitud=position.coords.longitude;
-                document.getElementById("longitud").value=longitud;
-                    
                     map.setCenter(geolocate);
                       
                       <?php
-                          $sql = "SELECT * FROM reportes WHERE estatus = '1' ORDER BY id_reporte DESC LIMIT 30";
+                          $sql = "SELECT * FROM reportes WHERE id_reporte = '$id'";
                           $res = mysqli_query($conn, $sql);
                           $row = mysqli_num_rows($res);
                           if($row == 0){?>
-
+                                alert("Error: No existe este reporte.");
                           <?php
                         }else{
                             for($i = 0; $i < $row; $i++){
                                   $consulta = mysqli_fetch_row($res);?>
-
+                                  var geolocate = new google.maps.LatLng(<?php echo $consulta[3]; ?>, <?php echo $consulta[4]; ?>);
+                                  map.setCenter(geolocate);
                                   var nombrereporte="<?php echo $consulta[1]; ?>";
                                   var latitudreporte="<?php echo $consulta[3]; ?>";
                                   var longitudreporte="<?php echo $consulta[4]; ?>";

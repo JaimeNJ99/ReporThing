@@ -4,8 +4,7 @@
 
 <html>
     <head>
-        <title>Graficas</title>
-	<link rel="stylesheet" type="text/css" href="JavaScript/bootstrap/css/bootstrap.css">
+    <title>Graficas</title>
 	<script src="JavaScript/plotly-2.6.3.min.js"></script>
     </head>
     <style>
@@ -19,17 +18,9 @@
             display: block;
             background-color: #efefef;
         }
-        .grafica1{
-            width: 405px;
-            height: 305px;
-            margin: 10px;
-            border: 1px solid #000;
-            display: inline-block;
-        }
-
-	.grafica2{
-            width: 405px;
-            height: 455px;
+        .grafica{
+            width: 75%;
+            height: auto;
             margin: 10px;
             border: 1px solid #000;
             display: inline-block;
@@ -49,16 +40,16 @@
         <div id="base">
             <br>
             <h1>Información General</h1>
-	    <div class="grafica1">
-	    <div id="Grafica1"></div>
-            <div class="titulog"><label>Grafica de Pastel - Numero de Reportes</label></div>
-	    </div>
-            <div class="grafica2">
-	    <div id="Grafica2">>/div>
-	    </div>
-	    <div class="titulog"><label>Grafica de barras - Rating de Reportes</label></div>
-
-        </div>
+	        <div class="grafica">
+                <div id="Grafica1"></div>
+                <div class="titulog"><label>Grafica de Pastel - Numero de Reportes</label></div>
+	        </div><br>
+            <div class="grafica">
+	            <div id="Grafica2"></div>
+                <div class="titulog"><label>Grafica de barras - Rating de Reportes</label></div>
+	        </div>
+	        
+        </div> 
     </body>
     <?php require "footer.php"; ?>
 </html>
@@ -66,5 +57,5 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#Grafica1').load('pastel.php');
-		$('#Grafica2').load('barras.php'); g});
+		$('#Grafica2').load('barras.php'); });
 </script>

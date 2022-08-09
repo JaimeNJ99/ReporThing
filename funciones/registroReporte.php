@@ -10,18 +10,18 @@
     $descripcion  = $_REQUEST['descripcion'];
     $latitud      = $_REQUEST['latitud'];
     $longitud     = $_REQUEST['longitud'];
+    $zona         = $_REQUEST['zona'];
+    //define zona horaria local
+    date_default_timezone_set('America/Mexico_City');
+    $fecha = date("Y-m-d");
+    $hora  = date("H:i:s");
 
-    //$coma=',';
-    //$ubicacion  =$longitud.$coma.$latitud;
-
-
-    //$sql = "INSERT INTO reportes VALUES(0,'$titulo','$tipo','$ubicacion','$descripcion','1')";
-    $sql = "INSERT INTO reportes VALUES(0,'$titulo','$tipo','$latitud','$longitud','$descripcion','1')";
+    $sql = "INSERT INTO reportes VALUES(0,'$titulo','$tipo','$latitud','$longitud','$descripcion','1','$fecha','$hora','$zona')";
     $res = mysqli_query($conn,$sql);
 
     $sql = "SELECT id_reporte FROM reportes
     WHERE titulo = '$titulo' AND tipo = '$tipo' AND latitud = '$latitud' AND longitud = '$longitud'
-    AND descripcion = '$descripcion' AND estatus = 1";
+    AND descripcion = '$descripcion' AND estatus = 1 AND fecha = '$fecha' AND hora = '$hora' AND zona = '$zona' ";
     $res2 = mysqli_query($conn, $sql);
     $array = mysqli_fetch_row($res2);
 

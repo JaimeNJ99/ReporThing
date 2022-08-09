@@ -31,7 +31,7 @@
             }
             #cuerpo{
                 width: auto;
-                min-height: 100%;
+                min-height: 70%;
             }
         </style>
     </head>

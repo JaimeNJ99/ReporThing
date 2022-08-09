@@ -3,12 +3,18 @@
     if(isset($idu)){
         $admin = $_SESSION['admin'];
     }
+    if(isset($_GET["zona"])){
+        $zona = $_GET["zona"];
+    }
 ?>
 <html>
     <head>
         <title>Reportes</title>
         <script src="JavaScript/jquery-3.6.0.min.js"></script>
-        <script>
+        <script> function initMap(){} </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUkFLr3FhXywsglhyFSpg1CitJHWRh_dQ&callback=initMap&libraries=&v=weekly&libraries=geometry"></script>
+       <!-- <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script> -->
+        <script> 
             function rating(id){
                 var calif = $('#calif'+id).val();
                 
@@ -27,6 +33,7 @@
 					});
                 }
             }
+
             function eliminaAdmin(id){
                 $.ajax({
                     url         : 'funciones/Adminelimina.php?id='+id,
@@ -40,6 +47,84 @@
                         }
                     }
                 });
+            }
+            function zona(){
+                    <?php if (isset($_GET["zona"])){ ?>
+                        return;
+                    <?php } ?>
+                if(navigator.geolocation){
+                    navigator.geolocation.getCurrentPosition(function(position){
+                        var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                        var mapOptions={
+                            zoom: 15,
+                            mapTypeId: 'roadmap'
+                        };
+                        var map = new google.maps.Map(document.getElementById("google_canvas"),mapOptions);
+
+                        var vertices = [
+                            {lat: 20.613377, lng: -103.395842},
+                            {lat: 20.636385, lng: -103.307237},
+                            {lat: 20.694670, lng: -103.269753},
+                            {lat: 20.740587, lng: -103.309156},
+                            {lat: 20.709887, lng: -103.406395}
+                        ];
+                        var guadalajara = new google.maps.Polygon({
+                            path: vertices,
+                            map: map,
+                        });
+
+                        var vertices = [
+                            {lat: 20.613377, lng: -103.395842},
+                            {lat: 20.589646, lng: -103.420527},
+                            {lat: 20.553967, lng: -103.350489},
+                            {lat: 20.604751, lng: -103.258135},
+                            {lat: 20.636385, lng: -103.307237}
+                        ];
+                        var tlaquepaque = new google.maps.Polygon({
+                            path: vertices,
+                            map: map,
+                            });
+
+                        var vertices = [
+                            {lat: 20.609627, lng: -103.479527},
+                            {lat: 20.747102, lng: -103.441075},
+                            {lat: 20.773427, lng: -103.342884},
+                            {lat: 20.740587, lng: -103.309156},
+                            {lat: 20.709887, lng: -103.406395},
+                            {lat: 20.613377, lng: -103.395842} 
+                        ];
+                        var zapopan = new google.maps.Polygon({
+                            path: vertices,
+                            map: map,
+                        });
+                        
+                        var vertices = [
+                            {lat: 20.694670, lng: -103.269753},
+                            {lat: 20.667243, lng: -103.198343},
+                            {lat: 20.579684, lng: -103.226229},
+                            {lat: 20.636385, lng: -103.307237} 
+                        ];
+                        var tonala = new google.maps.Polygon({
+                            path: vertices,
+                            map: map,
+                        });
+                
+                        if(google.maps.geometry.poly.containsLocation(pos, zapopan)){
+                            window.location.href = window.location.href + "?zona=zapopan";
+                        }else if(google.maps.geometry.poly.containsLocation(pos, guadalajara)){
+                            window.location.href = window.location.href + "?zona=guadalajara";
+                        }else if(google.maps.geometry.poly.containsLocation(pos, tlaquepaque)){
+                            window.location.href = window.location.href + "?zona=tlaquepaque";
+                        }else if(google.maps.geometry.poly.containsLocation(pos, tonala)){
+                            window.location.href = window.location.href + "?zona=tonala";
+                        }else{
+                            alert("No se pudo determinar tu ubicación, Fuera del area de covertura.");
+                        }
+                    });
+                }else{
+                    alert("No se pudo determinar tu ubicación.");
+                }
+                
             }
             function verReporte(id){
                 window.location.href = "ver_reporte.php?val="+ id;
@@ -65,7 +150,6 @@
                 display: inline-block;
                 overflow-y: scroll;
             }
-
             .titulotabla{
                 background-color: skyblue;
                 height: auto;
@@ -85,7 +169,6 @@
                 height: auto;
                 min-height: 100px;
                 border: 1px solid #000;
-                display: block;
             }
             .texto{
                 width: 60%;
@@ -137,33 +220,41 @@
                     }
                 ?>
             }
+            #load{
+                height: 100px; 
+                width: 300px;
+            }
         </style>
     </head>
-    <body>
+    <body onload="zona();">
+        <input type="hidden" id="google_canvas"  class="google_canvas" >
         <br>
         <div class="centro">
-            <!-- tabla reportes recientes -->
-            <div class="tabla">
-                <div class="titulotabla"><h1>Recientes</h1></div>
-                <?php 
-                    $sql = "SELECT * FROM reportes WHERE estatus = 1 ORDER BY id_reporte DESC LIMIT 20";
-                    $res = mysqli_query($conn, $sql);
-                    $row = mysqli_num_rows($res);
-                    if($row == 0){ ?>
-                        <div class="entrada">
-                            <b>Todavia no hay reportes </b>
-                        </div>
-                    <?php }else{
-                        for($i = 0; $i < $row; $i++){
-                            $consulta = mysqli_fetch_row($res);
-                            $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
-                            $tipores = mysqli_query($conn, $sql);
-                            $tipoConsulta = mysqli_fetch_row($tipores);
+            <div class="tabla" id="tablaZona" >
+            <div class="titulotabla"><?php if($zona){?><h1><?php echo $zona; ?></h1> <?php }else{ ?><h1>Determinando</h1><?php } ?></div>
+                <?php  
+                $sqlZona = "SELECT * FROM reportes WHERE  estatus = 1 AND zona = '$zona'";
+                $res = mysqli_query($conn, $sqlZona);
+                $row = mysqli_num_rows($res);
+                    
+                if($row == 0){ ?>
+                    <div class="entrada">
+                        <b>Determinando tu zona, porfavor espere...</b><br>
+                        <a><img src="imagenes/recursos/load.gif" id="load"></a>
+                    </div>
+                <?php }else{
+                    for($i = 0; $i < $row; $i++){
+                        $consulta = mysqli_fetch_row($res);
+                        $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
+                        $tipores = mysqli_query($conn, $sql);
+                        $tipoConsulta = mysqli_fetch_row($tipores);
                 ?>
+                
+                            
                 <div class="entrada">
                     <div class="titulo"><?php echo $consulta[1]; ?></div><br>
                     <div class="texto1"><p>Zona:</p><?php echo $consulta[9];?></div>
-                    <div class="texto1"><p>Tipo:</p><?php echo $tipoConsulta[0]; ?></div>
+                    <div class="texto1"><p>Tipo de reporte:</p><?php echo $tipoConsulta[0]; ?></div>
                     <div class="texto1"><p>Fecha:</p><?php echo $consulta[7]; ?></div> 
                     <div class="texto1"><p>Hora:</p><?php echo $consulta[8]; ?></div><br><br><br>
                     <div class="descripcion"><?php echo $consulta[5]; ?></div>
@@ -184,7 +275,7 @@
                             mysqli_free_result($resCalif);
                         ?>
                     </div> -->
-                    <br> 
+                    <br>
                     <input type="submit" value="Ver ubicación" onclick="verReporte(<?php echo $consulta[0]; ?>)">
                     <div id="mensaje<?php echo $consulta[0]; ?>" 
                         style="width: 100%; height: auto; color:skyblue;"></div>
@@ -192,83 +283,13 @@
                         <input class= "admin" type="submit" value="Eliminar" onclick="eliminaAdmin(<?php echo $consulta[0]; ?>)">
                     </div><br>
                 </div>
-               
                 <?php     
-                } mysqli_free_result($tipores); 
-                }
+                        } mysqli_free_result($tipores);
+                    }
                 mysqli_free_result($res);
+                //
                 ?>
             </div>
-            <!-- tabla reportes más votados -->
-            <!-- <br><br>
-            <div class="tabla">
-                <div class="titulotabla"><h1>Más votados</h1></div>
-                <?php 
-                    //Consulta los 20 reportes más votados
-                    $sql = "SELECT AVG(rating.calificacion),id_reporte FROM rating 
-                        GROUP by id_reporte ORDER BY AVG(calificacion) DESC LIMIT 20";
-                    $resAVG = mysqli_query($conn, $sql);
-                    $row = mysqli_num_rows($resAVG);
-                    
-                    if($row == 0){ ?>
-                        <div class="entrada">
-                            <b>Todavia no se ha calificado algun reporte</b>
-                        </div>
-                    <?php }else{
-                        for($i = 0; $i < $row; $i++){
-                            //toma el id del siguiente reporte más votado
-                            $avg = mysqli_fetch_row($resAVG);
-                            //
-                            $sql = "SELECT * FROM reportes WHERE id_reporte = $avg[1]
-                                    AND estatus = 1";
-                            $res = mysqli_query($conn, $sql);
-                            $row1 = mysqli_num_rows($res);
-                            for($j = 0; $j < $row1; $j++){
-                                $consulta = mysqli_fetch_row($res);
-                                $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
-                                $tipores = mysqli_query($conn, $sql);
-                                $tipoConsulta = mysqli_fetch_row($tipores);
-                    ?>
-                    <div class="entrada">
-                        <div class="texto"><div class="titulo"><?php echo $consulta[1]; ?></div></div>
-                        <div class="texto">Ubicación:<br><?php echo $consulta[3]; echo ", "; echo $consulta[4]; ?></div>
-                        <div class="texto">Tipo de reporte:<br><?php echo $tipoConsulta[0]; ?></div>
-                        <p>Descripción: </p>
-                        <div class="texto"><div class="descripcion"><?php echo $consulta[5]; ?></div></div>
-                        <br>Calificalo: 
-                        <input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">
-                        <input type="submit" value="Calificalo" onclick="rating(<?php echo $consulta[0]; ?>)">
-                        <div id="mensaje<?php echo $consulta[0]; ?>" 
-                                style="width: 100%; height: auto; color:skyblue;"></div>
-                        <div class="texto">Calificación:
-                        <?php 
-                            
-                                $sqlCalif = "SELECT AVG(calificacion) FROM rating WHERE id_reporte = '$consulta[0]'";
-                                $resCalif = mysqli_query($conn, $sqlCalif);
-                                $consultaCalif = mysqli_fetch_row($resCalif);
-                                if($consultaCalif[0] != ''){
-                                    echo $consultaCalif[0];
-                                }else{
-                                    echo "Sin calificación"; 
-                                }
-                                mysqli_free_result($resCalif);
-                        ?>
-                                </div>
-                    <div class="texto">
-                        <input class= "admin" type="submit" value="Eliminar" onclick="eliminaAdmin(<?php echo $consulta[0]; ?>)">
-                    </div>
-                </div>
-                <?php
-                                mysqli_free_result($tipores); 
-                            } 
-                            mysqli_free_result($res);
-                        }
-                   
-                }
-                mysqli_free_result($resAVG);
-                
-                ?>
-            </div> -->
         </div>
         <?php require "footer.php" ?>
     </body>
