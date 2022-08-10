@@ -15,40 +15,60 @@
             margin-left: auto;
             margin-right: auto;
             text-align: center;
-            display: block;
+            
             background-color: #efefef;
         }
         .grafica{
             width: 75%;
-            height: auto;
+            height: 350px;
             margin: 10px;
-            border: 1px solid #000;
+            border-bottom: 1px solid #000;
             display: inline-block;
         }
         .titulog{
             width: 350px;
-            height: 30px;
+            height: 25px;
             margin: 10px;
             border: 1px solid #000;
+            background-color: #87CEFA;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .graf{
+            margin: auto;
             display: inline-block;
         }
 
-
     </style>
     <body>
+        <h1 style="text-align:center">Graficas</h1>
         <br>
         <div id="base">
             <br>
-            <h1>Información General</h1>
 	        <div class="grafica">
-                <div id="Grafica1"></div>
-                <div class="titulog"><label>Grafica de Pastel - Numero de Reportes</label></div>
+                <div class="titulog"><label>Numero de Reportes totales</label></div>
+                <div id="Grafica1" class="graf"></div>
 	        </div><br>
             <div class="grafica">
-	            <div id="Grafica2"></div>
-                <div class="titulog"><label>Grafica de barras - Rating de Reportes</label></div>
-	        </div>
-	        
+                <div class="titulog" class="graf"><label>Ultimo mes</label></div>
+                <div id="Grafica2" class="graf"></div>
+            </div><br>
+	        <div class="grafica">
+                <div class="titulog"><label>Ultimo mes, en Guadalajara</label></div>
+                <div id="Grafica3" class="graf"></div>
+            </div><br>
+            <div class="grafica">
+                <div class="titulog"><label>Ultimo mes, en Zapopan</label></div>
+                <div id="Grafica4" class="graf"></div>
+	        </div><br>
+            <div class="grafica">
+                <div class="titulog"><label>Ultimo mes, en Tlaquepaque</label></div>
+                <div id="Grafica5" class="graf"></div>
+	        </div><br>
+            <div class="grafica">
+                <div class="titulog"><label>Ultimo mes, en Tonalá</label></div>
+                <div id="Grafica6" class="graf"></div>
+	        </div><br>
         </div> 
     </body>
     <?php require "footer.php"; ?>
@@ -56,6 +76,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#Grafica1').load('pastel.php');
-		$('#Grafica2').load('barras.php'); });
+		$('#Grafica1').load('funciones/graficas/total_reportes.php');
+		$('#Grafica2').load('funciones/graficas/ultimo_mes.php'); 
+        $('#Grafica3').load('funciones/graficas/guadalajara.php');
+        $('#Grafica4').load('funciones/graficas/zapopan.php');
+        $('#Grafica5').load('funciones/graficas/tlaquepaque.php');
+        $('#Grafica6').load('funciones/graficas/tonala.php');
+    });
 </script>
