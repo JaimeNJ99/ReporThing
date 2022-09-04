@@ -77,9 +77,9 @@
             <br>
             <div id="login">
                 <br>
-                <div class="columna"><label>Nombre: </label><input type="text" id="user" name="user" placeholder="Escribe tu nombre."></div><br> 
-                <div class="columna"><label>Correo: </label><input type="text" id="correo" name="correo" placeholder="Escribe tu correo." onblur="verificaCorreo();"></div><br>
-                <div class="columna"><label>Contraseña: </label><input type="text" id="password" name="password" placeholder="Escribe tu contraseña."></div><br>
+                <div class="columna"><label>Nombre: </label><input type="text" id="user" name="user" placeholder="Escribe tu nombre." onkeypress="return event.keyCode != 13;"></div><br> 
+                <div class="columna"><label>Correo: </label><input type="text" id="correo" name="correo" placeholder="Escribe tu correo." onblur="verificaCorreo();" onkeypress="return event.keyCode != 13;"></div><br>
+                <div class="columna"><label>Contraseña: </label><input type="text" id="password" name="password" placeholder="Escribe tu contraseña." onkeypress="return event.keyCode != 13;"></div><br>
                 <div class="columna"><label>Avatar:</label><br>
                 <input type="file"  name="avatar"></div><br>
                 <div class="columna"><input onClick="registrar(); return false;" type="submit" value="Registrarse"></div>

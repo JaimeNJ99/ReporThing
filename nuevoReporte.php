@@ -91,7 +91,7 @@
             <br>
             <div id="base">
                 <br>
-                <div class="columna"><label>Titulo: </label><input type="text" id="titulo" name="titulo" placeholder="Titulo del reporte." style="text-align:center;"></div><br>
+                <div class="columna"><label>Titulo: </label><input type="text" id="titulo" name="titulo" placeholder="Titulo del reporte." style="text-align:center;" onkeypress="return event.keyCode != 13;"></div><br>
                 <div id="google_canvas"  class="google_canvas"></div>
                 <div class="columna"><label>Tipo: </label></div><br>
                 <div class="columna"><select name="tipo" id="tipo">
@@ -103,7 +103,7 @@
                   <option value="5"> Otro</option>
                 </select></div><br><br>
                 <div class="columna"><label>Descripci&oacute;n:</label><br>
-                <textarea id="descripcion" class="descripcion" name="descripcion" rows="8" cols="25"></textarea></div><br>
+                <textarea id="descripcion" class="descripcion" name="descripcion" rows="8" cols="25" onkeypress="return event.keyCode != 13;"></textarea></div><br>
                 <br><h3>Arrastra el marcador</h3>
                 <input type="hidden" id="latitud" name="latitud">
                 <input type="hidden" id="longitud" name="longitud">

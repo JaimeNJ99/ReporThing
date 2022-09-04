@@ -56,8 +56,8 @@
             <br>
             <div id="base">
                 <br>
-                <div class="columna"><label>Nombre: </label><input type="text" id="user" name="user" placeholder="Escribe tu nuevo nombre."></div><br> 
-                <div class="columna"><label>Contraseña: </label><input type="text" id="password" name="password" placeholder="Escribe tu nueva contraseña."></div><br>
+                <div class="columna"><label>Nombre: </label><input type="text" id="user" name="user" placeholder="Escribe tu nuevo nombre." onkeypress="return event.keyCode != 13;"></div><br> 
+                <div class="columna"><label>Contraseña: </label><input type="text" id="password" name="password" placeholder="Escribe tu nueva contraseña." onkeypress="return event.keyCode != 13;"></div><br>
                 <div class="columna"><label>Avatar nuevo:</label><br>
                 <input type="file"  name="avatar"></div><br>
                 <div class="columna"><input onClick="registrar(); return false;" type="submit" value="Aplicar cambios"></div>

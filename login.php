@@ -67,10 +67,10 @@
             <div id="login">
                 <br> 
                 <div class="columna">
-                    <label>Correo: </label><input type="text" id="correo" name="correo" placeholder="Escribe tu correo.">
+                    <label>Correo: </label><input type="text" id="correo" name="correo" placeholder="Escribe tu correo." onkeypress="return event.keyCode != 13;">
                 </div><br>
                 <div class="columna">
-                    <label>Contraseña: </label><input type="text" id="password" name="password" placeholder="Escribe tu contraseña.">
+                    <label>Contraseña: </label><input type="text" id="password" name="password" placeholder="Escribe tu contraseña." onkeypress="return event.keyCode != 13;">
                 </div><br>
                 <div class="columna">
                     <input onClick="validar(); return false;" type="submit" value="Ingresar">
