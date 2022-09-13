@@ -8,6 +8,10 @@
     $res = mysqli_fetch_array($consulta);   //devuelve un array con los campos de la consulta
     $nombre = $res["0"];    //guarda el campo 0 de la consulta
     */
+    date_default_timezone_set('America/Mexico_City');
+    $fecha = date("Y-m-d");
+    $hora  = date("H:i:s");
+    $zona = "zapopan"
 ?>
 <html>
     <head>
@@ -50,6 +54,11 @@
         <div id="nuevo_reporte">
             <a href="nuevoReporte.php"><img class="imagen"src="./imagenes/recursos/Nuevo_reporte.png"></a>
         </div>
+        <input type="button">
+        <?php //aqui se mostraría el resultado de aplicar machine learning 
+            $out = shell_exec("python KNN/tipoSucesoknn.py '$zona' '$fecha' '$hora'");
+            echo $out; 
+        ?>
     </div>
     <?php require "footer.php"; ?>
     </body>
