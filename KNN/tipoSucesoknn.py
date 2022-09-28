@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from base64 import encode
 import pandas as pd                                 #pip install pandas
 import seaborn as sns                               #pip install seaborn
 import sys
@@ -35,18 +36,38 @@ zona = "zapopan"
 fecha = "2022-09-11"
 hora = "18:10:02"
 nuevo = {fecha,hora,zona}
+
+###########################################Coregir normalización############################
 #normaliza los datos
 encoder = preprocessing.LabelEncoder()
 zona_norm = encoder.fit_transform(np.ravel(datos[['zona']]))
-fecha_norm = encoder.fit_transform(np.ravel(datos[['fecha']]))
+zona_e = encoder.transform([zona])
+
+#fecha_norm = encoder.fit_transform(np.ravel(datos[['fecha']]))
+escala = preprocessing.MinMaxScaler()
 hora_norm = encoder.fit_transform(np.ravel(datos[['hora']]))
-tipo_norm = encoder.fit_transform(np.ravel(datos[['tipo']]))
-#print(fecha_norm)
-datos_norm = list(zip(zona_norm,fecha_norm,hora_norm))
+hora_e = encoder.transform([hora])
+print(hora_norm)
+#tipo_norm = encoder.fit_transform(np.ravel(datos[['tipo']]))
+####################################
+#escala = preprocessing.MinMaxScaler()
+d = datos[["zona", "hora"]]
+
+d = list(zip(zona_norm,hora_norm))
+c = datos["tipo"]
+
+#print(d)
+#print(datos.columns.values)
+#datos_norm = list(zip(zona_norm,hora_norm))
+#print(datos_norm.columns.values)
+
 knn = KNeighborsClassifier(n_neighbors=3)
-#entrena el modelo con los datos normalizados
-knn.fit(datos_norm,tipo_norm)
-#realiza la predicción en base a lo entrenado
-predict = knn.predict(nuevo)
+###entrena el modelo con los datos normalizados
+
+knn.fit(d,c)
+###realiza la predicción en base a lo entrenado
+
+entrada = list(zip(zona_e,hora_e))
+predict = knn.predict(entrada)
 
 print(predict)
