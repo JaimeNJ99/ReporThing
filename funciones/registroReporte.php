@@ -14,9 +14,10 @@
     //define zona horaria local
     date_default_timezone_set('America/Mexico_City');
     $fecha = date("Y-m-d");
-    $hora  = date("H:i:s");
+    $hora  = date("H");
+    $minuto = date("i");
 
-    $sql = "INSERT INTO reportes VALUES(0,'$titulo','$tipo','$latitud','$longitud','$descripcion','1','$fecha','$hora','$zona')";
+    $sql = "INSERT INTO reportes VALUES(0,'$titulo','$tipo','$latitud','$longitud','$descripcion','1','$fecha','$hora','$zona','$minuto')";
     $res = mysqli_query($conn,$sql);
 
     $sql = "SELECT id_reporte FROM reportes

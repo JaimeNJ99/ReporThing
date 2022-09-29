@@ -24,50 +24,57 @@ conn = conn.format(usuario, contrasena, url_servidor, puerto, esquema, plugin_au
 engine = create_engine(conn)
 
 #Seleccionamos los datos de la bd
-sql = "SELECT tipo, fecha, hora, zona FROM reportes WHERE estatus = 1 AND fecha IS NOT NULL AND hora IS NOT NULL AND zona IS NOT NULL"
+sql = "SELECT tipo, hora, zona FROM reportes WHERE estatus = 1 AND fecha IS NOT NULL AND hora IS NOT NULL AND zona IS NOT NULL"
 #creamos un dataframe con la consulta
 datos = pd.read_sql_query(sql, engine)
-#creamos un nuevo registro con los datos recogidos del usuario desde php
+
+#####creamos un nuevo registro con los datos recogidos del usuario desde php
 #zona  = sys.argv[1]
-#fecha = sys.argv[2]
-#hora  = sys.argv[3]
+#hora  = sys.argv[2]
+
 #datos de ejemplo
 zona = "zapopan"
 fecha = "2022-09-11"
-hora = "18:10:02"
-nuevo = {fecha,hora,zona}
+hora = "16"
 
-###########################################Coregir normalización############################
-#normaliza los datos
+#####normaliza los datos
+#normaliza zona
 encoder = preprocessing.LabelEncoder()
 zona_norm = encoder.fit_transform(np.ravel(datos[['zona']]))
 zona_e = encoder.transform([zona])
 
-#fecha_norm = encoder.fit_transform(np.ravel(datos[['fecha']]))
-escala = preprocessing.MinMaxScaler()
+#normaliza hora
 hora_norm = encoder.fit_transform(np.ravel(datos[['hora']]))
 hora_e = encoder.transform([hora])
-print(hora_norm)
-#tipo_norm = encoder.fit_transform(np.ravel(datos[['tipo']]))
-####################################
-#escala = preprocessing.MinMaxScaler()
-d = datos[["zona", "hora"]]
 
+#normaliza tipo suceso
+c = encoder.fit_transform(np.ravel(datos[['tipo']]))
+#generamos una lista con los datos normalizados
 d = list(zip(zona_norm,hora_norm))
-c = datos["tipo"]
 
-#print(d)
-#print(datos.columns.values)
-#datos_norm = list(zip(zona_norm,hora_norm))
-#print(datos_norm.columns.values)
-
+#Creación de objeto clasificador y asignación del valor de k
 knn = KNeighborsClassifier(n_neighbors=3)
 ###entrena el modelo con los datos normalizados
-
 knn.fit(d,c)
-###realiza la predicción en base a lo entrenado
 
+###realiza la predicción en base a lo entrenado
+#Creación de lista con los datos de entrada
 entrada = list(zip(zona_e,hora_e))
+#prediccion en base a los datos de entrada y el modelo entrenado
 predict = knn.predict(entrada)
 
-print(predict)
+#Transformación de la predicción al tipo de suceso
+if predict == 0:
+    predicted = "Asalto"
+elif predict == 1:
+    predicted = "Accidente"
+elif predict == 2:
+    predicted = "Acoso"
+elif predict == 3:
+    predicted = "Precaución"
+elif predict == 4:
+    predicted = "Otro"
+else:
+    predicted = "Ha ocurrido un error inesperado"
+#retorno de datos a la web
+print(predicted)

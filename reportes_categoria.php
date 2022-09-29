@@ -193,7 +193,7 @@
                     <div class="texto1"><p>Zona:</p><?php echo $consulta[9];?></div>
                     <div class="texto1"><p>Tipo de reporte:</p><?php echo $tipoConsulta[0]; ?></div>
                     <div class="texto1"><p>Fecha:</p><?php echo $consulta[7]; ?></div> 
-                    <div class="texto1"><p>Hora:</p><?php echo $consulta[8]; ?></div><br><br><br>
+                    <div class="texto1"><p>Hora:</p><?php echo $consulta[8]; echo ":"; echo $consulta[10]; ?></div><br><br><br>
                     <div class="descripcion"><?php echo $consulta[5]; ?></div>
                     <!--<p>Calificalo:</p> 
                     <input type="number" id="calif<?php echo $consulta[0]; ?>" min="1" max="5">

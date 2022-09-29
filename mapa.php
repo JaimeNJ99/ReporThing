@@ -71,10 +71,11 @@
                                   var descripcion="<?php echo $consulta[5]; ?>";
                                   var fecha="<?php echo $consulta[7]; ?>";
                                   var hora="<?php echo $consulta[8]; ?>";
+                                  var minuto="<?php echo $consulta[10]; ?>";
                                   var posicion=new google.maps.LatLng(latitudreporte,longitudreporte);
                                   var contenido='<h1>'+ nombrereporte +'</h1>'+
                                   '<h3>Fecha: '+ fecha +'</h3>'+
-                                  '<h3>Hora: '+ hora +'</h3><br>'+
+                                  '<h3>Hora: '+ hora + ':'+ minuto +'</h3><br>'+
                                   '<h2>'+ descripcion +'</h2>';
 
                                   var geolocateReports = new google.maps.Marker({
