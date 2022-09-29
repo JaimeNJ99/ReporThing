@@ -12,7 +12,7 @@
 	</head>
 	
 	<body >
-	<br><br>
+	<br><br><br><br>
         <div id="footer">
 		    <table	 style="margin: auto;">
 			    <tr>
@@ -21,11 +21,6 @@
                     <td><a href="aboutus.php">Sobre nosotros</a></td>
                 </tr>
 		    </table>
-		    <div style="margin: auto; text-align: center;">
-				    <a href="https://www.facebook.com/" target="blank_">Facebook</a> | 
-				    <a href="https://twitter.com/" target="blank_">Twitter</a> | 
-				    <a href="https://www.youtube.com/" target="blank_">Youtube</a>
-			</div>
 		<br>
         </div>
 	</body>
