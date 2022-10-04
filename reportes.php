@@ -95,10 +95,10 @@
                 margin-bottom: 2px;
             }
             .texto1{
-                width: 24%;
+                width: 23%;
                 height: auto;
                 margin-bottom: 2px;
-                margin: 2px;
+                margin-left: 8px;
                 float: left;
                 font-size: 100%;
                 background-color: #efefef;

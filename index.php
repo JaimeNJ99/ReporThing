@@ -1,13 +1,6 @@
 <?php
 
     require "header.php";
-    /*----------Ejemplo de como hacer consultas a la bd------------------------
-    $sql = "SELECT titulo FROM reportes WHERE id_reporte = 4"; //se realiza la consulta sql
-    $consulta = mysqli_query($conn,$sql); //devuelve un objeto con la consulta
-    $row = mysqli_num_rows($consulta);  //devuelve el numero de columnas de la consulta
-    $res = mysqli_fetch_array($consulta);   //devuelve un array con los campos de la consulta
-    $nombre = $res["0"];    //guarda el campo 0 de la consulta
-    */
     date_default_timezone_set('America/Mexico_City');
     $fecha = date("Y-m-d");
     $hora  = date("H");
@@ -85,6 +78,8 @@
                             //alert("zona = zapopan");
                             var mensaje = document.getElementById("mensaje");
                             var x = document.getElementById("carga");
+                            var btn = document.getElementById("btnzona");
+                            btn.style.display = "none";
                             mensaje.style.display = "none";
                             x.style.display = "block";
                             $.ajax({
@@ -95,8 +90,9 @@
                                 success   : function(res){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
-                                    $('#mensaje').html('El tipo de suceso más probable es: '+ res);
+                                    $('#mensaje').html('El tipo de suceso más probable es: <br>'+ res);
                                 },error: function(){
+                                    x.style.display = "none";
 						            alert('Error al conectar al servidor...');
 						        }
                             });
@@ -114,8 +110,9 @@
                                 success   : function(res){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
-                                    $('#mensaje').html('El tipo de suceso más probable es: '+ res);
+                                    $('#mensaje').html('El tipo de suceso más probable es: <br>'+ res);
                                 },error: function(){
+                                    x.style.display = "none";
 						            alert('Error al conectar al servidor...');
 						        }
                             });
@@ -133,8 +130,9 @@
                                 success   : function(res){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
-                                    $('#mensaje').html('El tipo de suceso más probable es: '+ res);
+                                    $('#mensaje').html('El tipo de suceso más probable es: <br>'+ res);
                                 },error: function(){
+                                    x.style.display = "none";
 						            alert('Error al conectar al servidor...');
 						        }
                             });
@@ -152,8 +150,9 @@
                                 success   : function(res){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
-                                    $('#mensaje').html('El tipo de suceso más probable es: '+ res);
+                                    $('#mensaje').html('El tipo de suceso más probable es: <br>'+ res);
                                 },error: function(){
+                                    x.style.display = "none";
 						            alert('Error al conectar al servidor...');
 						        }
                             });
@@ -186,13 +185,73 @@
                 width: auto;
                 min-height: 60%;
                 text-align: center;
+                font-family: sans-serif;
             }
+            #ml{
+                width: auto;
+                height: 300px;
+                background-color: #D3D3D3;
+            }
+            #mltext{
+                float: left;
+                margin-left: 18%;
+                margin-top: 20px;
+                height: 255px;
+                width: 30%;
+                background-color: #87CEFA;
+            }
+            #mltext b{
+                text-align: center;
+                color:darkmagenta;
+                font-size: 30px;
+            }
+            #mlout{
+                float: right;
+                margin-right: 18%;
+                margin-top: 20px;
+                height: 250px;
+                width: 30%;
+                color:darkmagenta;
+            }
+            input[type=button]{
+                width: 200px;
+                height: 70px;
+            }
+            #block{
+                width: auto;
+                height: 300px;
+                background-color: #D3D3D3;
+                display: block;
+            }
+            .textboxl{
+                float: left;
+                margin-left: 18%;
+                margin-top: 20px;
+                height: 250px;
+                width: 30%;
+                color:darkmagenta;
+            }
+            .textboxr{
+                float: right;
+                margin-right: 18%;
+                margin-top: 20px;
+                height: 255px;
+                width: 30%;
+                color:darkmagenta;
+                background-color: #87CEFA;
+            }
+            .textboxr b{
+                text-align: center;
+                color:darkmagenta;
+                font-size: 40px;
+            }
+
         </style>
     </head>
     <body>
     <div id="cuerpo">
         <input type="hidden" id="google_canvas"  class="google_canvas" >    
-        <br>   
+        <br><br>   
 		<h1><img src = "imagenes/recursos/logo.png" width="60px" height="60px">
 		    <img src = "imagenes/recursos/Report.jpg" width="100px" height="60px">
 	    	<img src = "imagenes/recursos/Thing.png" width="120px" height="60px">
@@ -203,20 +262,46 @@
         <br>
         <div id="nuevo_reporte">
             <a href="nuevoReporte.php"><img class="imagen"src="./imagenes/recursos/Nuevo_reporte.png"></a>
-        </div>
-        <div>
-            <b>¿Quieres conocer el tipo de suceso más común según tu zona y hora actual?</b>
-            <br><br>
-            <input type="button" onclick="zona()" value="Haz click aqui">
-            <br><br>
-            <div id="carga" style="display:none">
-                <b>Determinando el tipo de suceso, porfavor espere...</b><br>
-                <a><img src="imagenes/recursos/cargando.gif" id="load"></a>
+        </div><br><br><br><br><br><br>
+        <div id="ml">
+            <div id="mltext"><br><br><br>
+                <b>¿Quieres conocer el tipo de suceso más común según tu zona y hora actual?</b>
             </div>
-            <div id="mensaje"></div>
+            <div id="mlout">
+                <div id="btnzona">
+                    <br><br><br><br><br>
+                    <input type="button" onclick="zona()" value="Haz click aqui">
+                </div>
+                <div id="carga" style="display:none"><br><br><br>
+                    <b>Determinando el tipo de suceso, porfavor espere...</b><br>
+                    <a><img src="imagenes/recursos/load.gif" id="load" width="130px" height="110px"></a>
+                </div><br><br><br><br><br>
+                <div id="mensaje"></div>
+            </div>
+        </div><br><br>
+        <div id="block">
+            <div class="textboxl">
+                <div><br>
+                    <div><B>Emergencias</B></div>
+                    <div>911</div>
+                </div>
+                <div><br>
+                    <div><B>Protección civil y bomberos</B></div>
+                    <div>01(33) 3675 3060</div>
+                </div>
+                <div><br>
+                    <div><B>Cruz roja</B></div>
+                    <div>01(33) 3613 8811 / 01(33) 3345 7777</div>
+                </div>
+                <div><br>
+                    <div><B>Atención ciudadana</B></div>
+                    <div>01 800 JALISCO (5254726) / (33) 3668 1804</div>
+                </div>
+            </div>
+            <div class="textboxr"><br><br><br>
+                <b>Conoce los números de emergencia</b>
+            </div>
         </div>
-        
-        
     </div>
     <?php require "footer.php"; ?>
     </body>
