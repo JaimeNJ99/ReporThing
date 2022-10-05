@@ -188,6 +188,7 @@
                     <input type="submit" value="Ver ubicación" onclick="verReporte(<?php echo $consulta[0]; ?>)">
                     <div id="mensaje<?php echo $consulta[0]; ?>" 
                         style="width: 100%; height: auto; color:skyblue;"></div>
+                    <br>
                     <div class="texto">
                         <input class= "admin" type="submit" value="Eliminar" onclick="eliminaAdmin(<?php echo $consulta[0]; ?>)">
                     </div><br>
