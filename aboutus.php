@@ -19,17 +19,10 @@
     <body>
     <br><br>
         <div id="info">
-        Proyecto Seminario de Ing, de Software 1<br>
-
-        Sección: D10<br>
-
-        Maestra: ZOILA LILIANA HERRERA LUJAN<br>
-
-        Equipo Apolo 11<br>
-
+        Proyecto modular<br>
+        Asesor: Francisco Quintanilla<br>
         Integrantes: <br>
         Laureano Maldonado Jorge Alberto <br>
-        Vázquez Galindo Ramses Emmanuel <br>
         Nepomuceno Jiménez Jaime<br>
 
         </div>

@@ -26,14 +26,16 @@
         copy($avatar_enc ,$dir.$fileName1);
 	}
     
-    
-    $sql = "INSERT INTO usuarios VALUES(0,'$user','$correo','$pass','$admin','$fileName1')";
-    $res = mysqli_query($conn,$sql);
+    $sql = "SELECT id_usuarios FROM usuarios";
+    $row = pg_query($conn,$sql);
+    $id = pg_num_rows($row);
+    $id_usr = $id + 1;
+    $sql = "INSERT INTO usuarios VALUES('$id_usr','$user','$correo','$pass','$admin','$fileName1')";
+    $res = pg_query($conn,$sql);
 
     if(!$res){
-        echo "No se ha podido insertar " . mysqli_errno($conn);
+        echo "No se ha podido insertar ";
         return;
     }
-    
     header("Location: ../login.php");
 ?>

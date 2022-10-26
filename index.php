@@ -5,7 +5,6 @@
     $fecha = date("Y-m-d");
     $hora  = date("H");
     $minuto = date("i");
-    $zona = "zapopan";
 ?>
 <html>
     <head>
@@ -25,7 +24,9 @@
                             mapTypeId: 'roadmap'
                         };
                         var map = new google.maps.Map(document.getElementById("google_canvas"),mapOptions);
-
+                        var latitud=position.coords.latitude;
+                        var longitud=position.coords.longitude;
+                            
                         var vertices = [
                             {lat: 20.613377, lng: -103.395842},
                             {lat: 20.636385, lng: -103.307237},
@@ -34,48 +35,61 @@
                             {lat: 20.709887, lng: -103.406395}
                         ];
                         var guadalajara = new google.maps.Polygon({
-                            path: vertices,
-                            map: map,
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(255,140,0)',
+                        fillColor: 'rgb(255, 255, 0)',
+                        strokeWeight: 4,
                         });
 
                         var vertices = [
-                            {lat: 20.613377, lng: -103.395842},
-                            {lat: 20.589646, lng: -103.420527},
-                            {lat: 20.553967, lng: -103.350489},
-                            {lat: 20.604751, lng: -103.258135},
-                            {lat: 20.636385, lng: -103.307237}
+                          {lat: 20.613377, lng: -103.395842},
+                          {lat: 20.553967, lng: -103.350489},
+                          {lat: 20.579684, lng: -103.226229},
+                          {lat: 20.636385, lng: -103.307237}
                         ];
                         var tlaquepaque = new google.maps.Polygon({
-                            path: vertices,
-                            map: map,
-                            });
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(0,139,139)',
+                        fillColor: 'rgb(32,178,170)',
+                        strokeWeight: 4,
+                        });
 
                         var vertices = [
-                            {lat: 20.609627, lng: -103.479527},
-                            {lat: 20.747102, lng: -103.441075},
-                            {lat: 20.773427, lng: -103.342884},
-                            {lat: 20.740587, lng: -103.309156},
-                            {lat: 20.709887, lng: -103.406395},
-                            {lat: 20.613377, lng: -103.395842} 
+                          {lat: 20.609627, lng: -103.479527},
+                          {lat: 20.747102, lng: -103.441075},
+                          {lat: 20.773427, lng: -103.342884},
+                          {lat: 20.740587, lng: -103.309156}, 
+                          {lat: 20.709887, lng: -103.406395},
+                          {lat: 20.613377, lng: -103.395842}
+                          
                         ];
                         var zapopan = new google.maps.Polygon({
-                            path: vertices,
-                            map: map,
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(75,0,130)',
+                        fillColor: 'rgb(75,0,130)',
+                        strokeWeight: 4,
                         });
                         
                         var vertices = [
-                            {lat: 20.694670, lng: -103.269753},
-                            {lat: 20.667243, lng: -103.198343},
-                            {lat: 20.579684, lng: -103.226229},
-                            {lat: 20.636385, lng: -103.307237} 
+                          {lat: 20.694670, lng: -103.269753},
+                          {lat: 20.667243, lng: -103.198343},
+                          {lat: 20.579684, lng: -103.226229},
+                          {lat: 20.636385, lng: -103.307237}
+                          
+                          
                         ];
                         var tonala = new google.maps.Polygon({
-                            path: vertices,
-                            map: map,
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(0,100,0)',
+                        fillColor: 'rgb(173,255,47)',
+                        strokeWeight: 4,
                         });
                 
                         if(google.maps.geometry.poly.containsLocation(pos, zapopan)){
-                            //alert("zona = zapopan");
                             var mensaje = document.getElementById("mensaje");
                             var x = document.getElementById("carga");
                             var btn = document.getElementById("btnzona");
@@ -86,7 +100,7 @@
                                 url       : 'funciones/pyExecute.php', 
 						        type      : 'post',
 						        dataType  : 'text',
-                                data      : 'zona=zapopan',
+                                data      : 'zona=zapopan&latitud='+latitud+'&longitud='+longitud,
                                 success   : function(res){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
@@ -97,7 +111,6 @@
 						        }
                             });
                         }else if(google.maps.geometry.poly.containsLocation(pos, guadalajara)){
-                            //alert("zona = guadalajara");
                             var mensaje = document.getElementById("mensaje");
                             var x = document.getElementById("carga");
                             mensaje.style.display = "none";
@@ -106,7 +119,7 @@
                                 url       : 'funciones/pyExecute.php', 
 						        type      : 'post',
 						        dataType  : 'text',
-                                data      : 'zona=guadalajara',
+                                data      : 'zona=guadalajara&latitud='+latitud+'&longitud='+longitud,
                                 success   : function(res){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
@@ -117,7 +130,6 @@
 						        }
                             });
                         }else if(google.maps.geometry.poly.containsLocation(pos, tlaquepaque)){
-                            //alert("zona = tlaquepaque");
                             var mensaje = document.getElementById("mensaje");
                             var x = document.getElementById("carga");
                             mensaje.style.display = "none";
@@ -126,7 +138,7 @@
                                 url       : 'funciones/pyExecute.php', 
 						        type      : 'post',
 						        dataType  : 'text',
-                                data      : 'zona=tlaquepaque',
+                                data      : 'zona=tlaquepaque&latitud='+latitud+'&longitud='+longitud,
                                 success   : function(res){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
@@ -137,7 +149,6 @@
 						        }
                             });
                         }else if(google.maps.geometry.poly.containsLocation(pos, tonala)){
-                            //alert("zona = tonala");
                             var mensaje = document.getElementById("mensaje");
                             var x = document.getElementById("carga");
                             mensaje.style.display = "none";
@@ -146,7 +157,7 @@
                                 url       : 'funciones/pyExecute.php', 
 						        type      : 'post',
 						        dataType  : 'text',
-                                data      : 'zona=tonala',
+                                data      : 'zona=tonala&latitud='+latitud+'&longitud='+longitud,
                                 success   : function(res){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
@@ -158,8 +169,8 @@
                             });
                         }else{
                             alert("No se pudo determinar tu ubicación, Fuera del area de covertura.");
-                        }
-                    });
+                        }}); 
+                    
                 }else{
                     alert("No se pudo determinar tu ubicación.");
                 }

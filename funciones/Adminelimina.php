@@ -6,7 +6,7 @@
     $id = $_REQUEST['id'];
 
     $sql = "UPDATE reportes SET estatus = 0 WHERE id_reporte = $id";
-    $res = mysqli_query($conn, $sql);
+    $res = pg_query($conn, $sql);
 
     if(!$res){
         echo 0;

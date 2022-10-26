@@ -2,7 +2,7 @@
     require "header.php";
 
     if(!isset($idu)){
-      $id = time();
+      $id = time() * rand(1,20);
     }else{
       $id = $idu; 
     }
@@ -28,7 +28,7 @@
                 var descripcion = registro.descripcion.value;
                 var zona = registro.zona.value;
 
-                if(titulo == '' || tipo == 0 || descripcion == '' || longitud == ''|| latitud == '' || zona == '0' ){ //si faltan campos
+                if(titulo == '' || tipo == 0 || longitud == ''|| latitud == '' || zona == '0' ){ //si faltan campos
                     $('#mensaje').html('Faltan campos por llenar.');
                     setTimeout("$('#mensaje').html('')", 5000);
                     return false;
@@ -91,7 +91,7 @@
             <br>
             <div id="base">
                 <br>
-                <div class="columna"><label>Titulo: </label><input type="text" id="titulo" name="titulo" placeholder="Titulo del reporte." style="text-align:center;" onkeypress="return event.keyCode != 13;"></div><br>
+                <div class="columna"><label>Titulo: </label><input type="text" id="titulo" name="titulo" maxlength="100" placeholder="Titulo del reporte." style="text-align:center;" onkeypress="return event.keyCode != 13;"></div><br>
                 <div id="google_canvas"  class="google_canvas"></div>
                 <div class="columna"><label>Tipo: </label></div><br>
                 <div class="columna"><select name="tipo" id="tipo">
@@ -103,7 +103,7 @@
                   <option value="5"> Otro</option>
                 </select></div><br><br>
                 <div class="columna"><label>Descripci&oacute;n:</label><br>
-                <textarea id="descripcion" class="descripcion" name="descripcion" rows="8" cols="25" onkeypress="return event.keyCode != 13;"></textarea></div><br>
+                <textarea id="descripcion" class="descripcion" name="descripcion" maxlength="200" rows="8" cols="25" onkeypress="return event.keyCode != 13;"></textarea></div><br>
                 <br><h3>Arrastra el marcador</h3>
                 <input type="hidden" id="latitud" name="latitud">
                 <input type="hidden" id="longitud" name="longitud">
@@ -139,64 +139,66 @@
 
                 //crea vertices de zona
                 var vertices = [
-                  {lat: 20.613377, lng: -103.395842},
-                  {lat: 20.636385, lng: -103.307237},
-                  {lat: 20.694670, lng: -103.269753},
-                  {lat: 20.740587, lng: -103.309156},
-                  {lat: 20.709887, lng: -103.406395}
-                ];
-                var guadalajara = new google.maps.Polygon({
-                  path: vertices,
-                  map: map,
-                  strokeColor: 'rgb(255,140,0)',
-                  fillColor: 'rgb(255, 255, 0)',
-                  strokeWeight: 4,
-                });
+                            {lat: 20.613377, lng: -103.395842},
+                            {lat: 20.636385, lng: -103.307237},
+                            {lat: 20.694670, lng: -103.269753},
+                            {lat: 20.740587, lng: -103.309156},
+                            {lat: 20.709887, lng: -103.406395}
+                        ];
+                        var guadalajara = new google.maps.Polygon({
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(255,140,0)',
+                        fillColor: 'rgb(255, 255, 0)',
+                        strokeWeight: 4,
+                        });
 
-                var vertices = [
-                  {lat: 20.613377, lng: -103.395842},
-                  {lat: 20.589646, lng: -103.420527},
-                  {lat: 20.553967, lng: -103.350489},
-                  {lat: 20.604751, lng: -103.258135},
-                  {lat: 20.636385, lng: -103.307237}
-                ];
-                var tlaquepaque = new google.maps.Polygon({
-                  path: vertices,
-                  map: map,
-                  strokeColor: 'rgb(0,139,139)',
-                  fillColor: 'rgb(32,178,170)',
-                  strokeWeight: 4,
-                });
+                        var vertices = [
+                          {lat: 20.613377, lng: -103.395842},
+                          {lat: 20.553967, lng: -103.350489},
+                          {lat: 20.579684, lng: -103.226229},
+                          {lat: 20.636385, lng: -103.307237}
+                        ];
+                        var tlaquepaque = new google.maps.Polygon({
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(0,139,139)',
+                        fillColor: 'rgb(32,178,170)',
+                        strokeWeight: 4,
+                        });
 
-                var vertices = [
-                  {lat: 20.609627, lng: -103.479527},
-                  {lat: 20.747102, lng: -103.441075},
-                  {lat: 20.773427, lng: -103.342884},
-                  {lat: 20.740587, lng: -103.309156},
-                  {lat: 20.709887, lng: -103.406395},
-                  {lat: 20.613377, lng: -103.395842} 
-                ];
-                var zapopan = new google.maps.Polygon({
-                  path: vertices,
-                  map: map,
-                  strokeColor: 'rgb(75,0,130)',
-                  fillColor: 'rgb(75,0,130)',
-                  strokeWeight: 4,
-                });
+                        var vertices = [
+                          {lat: 20.609627, lng: -103.479527},
+                          {lat: 20.747102, lng: -103.441075},
+                          {lat: 20.773427, lng: -103.342884},
+                          {lat: 20.740587, lng: -103.309156}, 
+                          {lat: 20.709887, lng: -103.406395},
+                          {lat: 20.613377, lng: -103.395842}
+                          
+                        ];
+                        var zapopan = new google.maps.Polygon({
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(75,0,130)',
+                        fillColor: 'rgb(75,0,130)',
+                        strokeWeight: 4,
+                        });
                         
-                var vertices = [
-                  {lat: 20.694670, lng: -103.269753},
-                  {lat: 20.667243, lng: -103.198343},
-                  {lat: 20.579684, lng: -103.226229},
-                  {lat: 20.636385, lng: -103.307237} 
-                ];
-                var tonala = new google.maps.Polygon({
-                  path: vertices,
-                  map: map,
-                  strokeColor: 'rgb(0,100,0)',
-                  fillColor: 'rgb(173,255,47)',
-                  strokeWeight: 4,
-                });
+                        var vertices = [
+                          {lat: 20.694670, lng: -103.269753},
+                          {lat: 20.667243, lng: -103.198343},
+                          {lat: 20.579684, lng: -103.226229},
+                          {lat: 20.636385, lng: -103.307237}
+                          
+                          
+                        ];
+                        var tonala = new google.maps.Polygon({
+                        path: vertices,
+                        map: map,
+                        strokeColor: 'rgb(0,100,0)',
+                        fillColor: 'rgb(173,255,47)',
+                        strokeWeight: 4,
+                        });
                 
                 //registra posición del marcador despues de moverlo
                 google.maps.event.addListener(marker, 'dragend', function() {

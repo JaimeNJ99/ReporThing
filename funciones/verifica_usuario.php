@@ -10,11 +10,11 @@
     $pass = $_REQUEST['pass'];
     $pass = md5($pass);
 
-    $sql = "SELECT * FROM usuarios WHERE correo = '$correo' AND contraseña = '$pass' ";
+    $sql = "SELECT * FROM usuarios WHERE correo = '$correo' AND contrasena = '$pass' ";
     
-    $result = mysqli_query($conn, $sql);
-    $rows = mysqli_num_rows($result);
-    $array = mysqli_fetch_array($result);
+    $result = pg_query($conn, $sql);
+    $rows = pg_num_rows($result);
+    $array = pg_fetch_array($result);
     
     if($rows == 1){
         //asignamos los datos del usuario

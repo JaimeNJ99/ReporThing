@@ -48,14 +48,14 @@
                       
                       <?php
                           $sql = "SELECT * FROM reportes WHERE id_reporte = '$id'";
-                          $res = mysqli_query($conn, $sql);
-                          $row = mysqli_num_rows($res);
+                          $res = pg_query($conn, $sql);
+                          $row = pg_num_rows($res);
                           if($row == 0){?>
                                 alert("Error: No existe este reporte.");
                           <?php
                         }else{
                             for($i = 0; $i < $row; $i++){
-                                  $consulta = mysqli_fetch_row($res);?>
+                                  $consulta = pg_fetch_row($res);?>
                                   var geolocate = new google.maps.LatLng(<?php echo $consulta[3]; ?>, <?php echo $consulta[4]; ?>);
                                   map.setCenter(geolocate);
                                   var nombrereporte="<?php echo $consulta[1]; ?>";
@@ -86,7 +86,7 @@
                                   });
                                 <?php
                               } }
-                              mysqli_free_result($res);
+                              pg_free_result($res);
                               ?>
                           //////////////// geometrias
                         var vertices = [

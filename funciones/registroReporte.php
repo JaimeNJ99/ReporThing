@@ -17,20 +17,20 @@
     $hora  = date("H");
     $minuto = date("i");
 
-    $sql = "INSERT INTO reportes VALUES(0,'$titulo','$tipo','$latitud','$longitud','$descripcion','1','$fecha','$hora','$zona','$minuto')";
-    $res = mysqli_query($conn,$sql);
+    $sql = "SELECT id_reporte FROM reportes";
+    $row = pg_query($conn,$sql);
+    $id_rep = pg_num_rows($row);
+    $id_rep = $id_rep + 1;
+    echo $id_rep;
+    
+    $sql = "INSERT INTO reportes VALUES('$id_rep','$titulo','$tipo','$latitud','$longitud','$descripcion','1','$fecha','$hora','$zona','$minuto')";
+    $res = pg_query($conn,$sql);
 
-    $sql = "SELECT id_reporte FROM reportes
-    WHERE titulo = '$titulo' AND tipo = '$tipo' AND latitud = '$latitud' AND longitud = '$longitud'
-    AND descripcion = '$descripcion' AND estatus = 1 AND fecha = '$fecha' AND hora = '$hora' AND zona = '$zona' ";
-    $res2 = mysqli_query($conn, $sql);
-    $array = mysqli_fetch_row($res2);
-
-    $sql = "INSERT INTO reportes_realizados VALUES('$id', $array[0])";
-    $res2 = mysqli_query($conn, $sql);
+    $sql = "INSERT INTO reportes_realizados VALUES('$id', '$id_rep')";
+    $res2 = pg_query($conn, $sql);
 
     if(!$res || !$res2){
-        echo "No se ha podido insertar " . mysqli_errno($conn); 
+        echo "No se ha podido insertar "; 
         return;
     }
 

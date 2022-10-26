@@ -4,8 +4,8 @@
     
     $sql = "SELECT * FROM reportes WHERE reportes.id_reporte IN 
         (SELECT reportes_realizados.id_reporte FROM reportes_realizados WHERE id_usuario = $idu)";
-    $res = mysqli_query($conn, $sql);
-    $row = mysqli_num_rows($res);
+    $res = pg_query($conn, $sql);
+    $row = pg_num_rows($res);
     
 ?>
 <html>
@@ -119,11 +119,11 @@
 
                 <?php }else{ 
                     for($i=0;$i < $row; $i++){
-                        $consulta = mysqli_fetch_row($res); //tomamos toda la fila
+                        $consulta = pg_fetch_row($res); //tomamos toda la fila
                         
                         $sql = "SELECT nombre FROM tipos WHERE id_tipos = $consulta[2]";
-                        $tipores = mysqli_query($conn, $sql);
-                        $tipoConsulta = mysqli_fetch_row($tipores);
+                        $tipores = pg_query($conn, $sql);
+                        $tipoConsulta = pg_fetch_row($tipores);
                         ?>
                         <div class="caja">
                             <!--Se muestran todos los datos del reporte -->

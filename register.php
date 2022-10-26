@@ -14,7 +14,12 @@
                 var user = registro.user.value;
                 var pass = registro.password.value;
                 var avatar = registro.avatar.value;
-
+                var pass2 = registro.password2.value;
+                if(pass2 != pass){ //si no coinciden las contraseñas
+                    $('#mensaje').html('No coinciden las contraseñas.');
+                    setTimeout("$('#mensaje').html('')", 5000);
+                    return false;
+                }
                 if(correo == '' || user == '' || pass == ''){ //si faltan campos
                     $('#mensaje').html('Faltan campos por llenar.');
                     setTimeout("$('#mensaje').html('')", 5000);
@@ -52,7 +57,7 @@
         <style>
             #login{
                 width: 350px;
-                height:260px;
+                height:auto;
                 margin: auto;
                 border: 1px solid #010;
             }
@@ -62,7 +67,7 @@
                 text-align: center;
             }
             .error{
-                color: FF0000;
+                color: #FF0000;
                 margin-right: auto;
                 margin-left: auto;
                 text-align: center;
@@ -77,9 +82,10 @@
             <br>
             <div id="login">
                 <br>
-                <div class="columna"><label>Nombre: </label><input type="text" id="user" name="user" placeholder="Escribe tu nombre." onkeypress="return event.keyCode != 13;"></div><br> 
-                <div class="columna"><label>Correo: </label><input type="text" id="correo" name="correo" placeholder="Escribe tu correo." onblur="verificaCorreo();" onkeypress="return event.keyCode != 13;"></div><br>
-                <div class="columna"><label>Contraseña: </label><input type="text" id="password" name="password" placeholder="Escribe tu contraseña." onkeypress="return event.keyCode != 13;"></div><br>
+                <div class="columna"><label>Nombre: </label><br><input type="text" id="user" name="user" placeholder="Escribe tu nombre." onkeypress="return event.keyCode != 13;"></div>
+                <div class="columna"><label>Correo: </label><br><input type="text" id="correo" name="correo" placeholder="Escribe tu correo." onblur="verificaCorreo();" onkeypress="return event.keyCode != 13;"></div>
+                <div class="columna"><label>Contraseña: </label><br><input type="password" id="password" name="password" placeholder="Escribe tu contraseña." onkeypress="return event.keyCode != 13;"></div>
+                <div class="columna"><label>Vuelve a escribir tu contraseña: </label><br><input type="password" id="password2" name="password2" placeholder="Vuelve a escribir tu contraseña." onkeypress="return event.keyCode != 13;"></div>
                 <div class="columna"><label>Avatar:</label><br>
                 <input type="file"  name="avatar"></div><br>
                 <div class="columna"><input onClick="registrar(); return false;" type="submit" value="Registrarse"></div>

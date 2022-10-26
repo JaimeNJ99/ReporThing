@@ -51,7 +51,7 @@
                 text-align: center;
             }
             .error{
-                color: FF0000;
+                color: #FF0000;
                 margin-right: auto;
                 margin-left: auto;
                 text-align: center;
@@ -70,7 +70,7 @@
                     <label>Correo: </label><input type="text" id="correo" name="correo" placeholder="Escribe tu correo." onkeypress="return event.keyCode != 13;">
                 </div><br>
                 <div class="columna">
-                    <label>Contraseña: </label><input type="text" id="password" name="password" placeholder="Escribe tu contraseña." onkeypress="return event.keyCode != 13;">
+                    <label>Contraseña: </label><input type="password" id="password" name="password" placeholder="Escribe tu contraseña." onkeypress="return event.keyCode != 13;">
                 </div><br>
                 <div class="columna">
                     <input onClick="validar(); return false;" type="submit" value="Ingresar">

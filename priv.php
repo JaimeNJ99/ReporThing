@@ -19,8 +19,7 @@
     <body>
     <br><br>
         <div id = "info">
-        Esta página web es parte del proyecto final de la materia de 
-        solucion de problemas de ingenieria de software 1, es por esto que toda 
+        Esta página web es parte de nuestro proyecto modular, es por esto que toda 
         la información recolectada por esta pagina web esta destinada unica y
         exclusivamente con ese fin.
         </div>

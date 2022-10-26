@@ -56,14 +56,14 @@
                       
                       <?php
                           $sql = "SELECT * FROM reportes WHERE estatus = '1' ORDER BY id_reporte DESC LIMIT 30";
-                          $res = mysqli_query($conn, $sql);
-                          $row = mysqli_num_rows($res);
+                          $res = pg_query($conn, $sql);
+                          $row = pg_num_rows($res);
                           if($row == 0){?>
 
                           <?php
                         }else{
                             for($i = 0; $i < $row; $i++){
-                                  $consulta = mysqli_fetch_row($res);?>
+                                  $consulta = pg_fetch_row($res);?>
 
                                   var nombrereporte="<?php echo $consulta[1]; ?>";
                                   var latitudreporte="<?php echo $consulta[3]; ?>";
@@ -94,7 +94,7 @@
                                   });
                                 <?php
                               } }
-                              mysqli_free_result($res);
+                              pg_free_result($res);
                               ?>
                           //////////////// geometrias
                         var vertices = [
@@ -114,9 +114,8 @@
 
                         var vertices = [
                           {lat: 20.613377, lng: -103.395842},
-                          {lat: 20.589646, lng: -103.420527},
                           {lat: 20.553967, lng: -103.350489},
-                          {lat: 20.604751, lng: -103.258135},
+                          {lat: 20.579684, lng: -103.226229},
                           {lat: 20.636385, lng: -103.307237}
                         ];
                         var tlaquepaque = new google.maps.Polygon({

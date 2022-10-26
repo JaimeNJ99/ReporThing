@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <?php
     session_start();
 
     require "funciones/conexion.php";
     $conn = conexion(); //conexion a la BD
-
+    header('Content-Type: text/html; charset=UTF-8');
     //si existe la sesion tomamos el id
     if(isset($_SESSION["idu"])){
         $idu     = $_SESSION["idu"];

@@ -12,8 +12,8 @@
     $fileName1 = '';
 
     $sql = "SELECT * FROM usuarios WHERE id_usuario = $id";
-    $res = mysqli_query($conn,$sql);
-    $array = mysqli_fetch_array($res);
+    $res = pg_query($conn,$sql);
+    $array = pg_fetch_array($res);
 
     $pass = md5($pass);
 
@@ -42,9 +42,9 @@
     }
 
     $sql = "UPDATE usuarios SET 
-    username = '$nombre', contraseña = '$pass', avatar = '$avatar' 
+    username = '$nombre', contrasena = '$pass', avatar = '$avatar' 
     WHERE id_usuarios = $id";
-    $res = mysqli_query($conn, $sql);
+    $res = pg_query($conn, $sql);
 
     header("Location: ../modificar_perfil.php");
 

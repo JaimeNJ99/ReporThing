@@ -67,7 +67,7 @@
 	        </div><br>
             <div class="grafica">
                 <div class="titulog"><label>Ultimo mes, en Tonalá</label></div>
-                <div id="Grafica6" class="graf"></div>
+                <div id="Grafica6" class="graf"><b></b></div>
 	        </div><br>
         </div> 
     </body>
