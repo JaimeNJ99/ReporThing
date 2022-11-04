@@ -113,6 +113,8 @@
                         }else if(google.maps.geometry.poly.containsLocation(pos, guadalajara)){
                             var mensaje = document.getElementById("mensaje");
                             var x = document.getElementById("carga");
+                            var btn = document.getElementById("btnzona");
+                            btn.style.display = "none";
                             mensaje.style.display = "none";
                             x.style.display = "block";
                             $.ajax({
@@ -132,6 +134,8 @@
                         }else if(google.maps.geometry.poly.containsLocation(pos, tlaquepaque)){
                             var mensaje = document.getElementById("mensaje");
                             var x = document.getElementById("carga");
+                            var btn = document.getElementById("btnzona");
+                            btn.style.display = "none";
                             mensaje.style.display = "none";
                             x.style.display = "block";
                             $.ajax({
@@ -151,6 +155,8 @@
                         }else if(google.maps.geometry.poly.containsLocation(pos, tonala)){
                             var mensaje = document.getElementById("mensaje");
                             var x = document.getElementById("carga");
+                            var btn = document.getElementById("btnzona");
+                            btn.style.display = "none";
                             mensaje.style.display = "none";
                             x.style.display = "block";
                             $.ajax({

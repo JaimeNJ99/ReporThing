@@ -202,10 +202,12 @@
                     <br> 
                     <input type="submit" value="Ver ubicación" onclick="verReporte(<?php echo $consulta[0]; ?>)">
                     <br>
-                    <?php if(isset($admin)){ ?>
+                    <?php if(isset($idu)){ ?>
                         <div class="texto">
                             <input type="submit" value="Reportar abuso" onclick="reportado(<?php echo $consulta[0]; ?>, <?php echo $id; ?>)">
-                            <input class= "admin" type="submit" value="Eliminar" onclick="eliminaAdmin(<?php echo $consulta[0]; ?>)">
+                            <?php if(isset($admin)){ ?>
+                                <input class= "admin" type="submit" value="Eliminar" onclick="eliminaAdmin(<?php echo $consulta[0]; ?>)">
+                            <?php } ?>
                         </div>
                     <br>
                     <?php } ?>
