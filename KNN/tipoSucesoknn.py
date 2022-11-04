@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 from base64 import encode
-from cmath import acos
 import sys
 import numpy as np
 import psycopg2                                    
@@ -18,16 +17,16 @@ sql = "SELECT tipo, latitud, longitud, hora, zona  FROM reportes WHERE estatus =
 #creamos un dataframe con la consulta
 datos = pd.read_sql_query(sql, engine)
 ###Recojemos los datos enviados desde php###
-#zona  = sys.argv[1]
-#hora  = sys.argv[2]
-#latitud = sys.argv[3]
-#longitud = sys.argv[4]
+zona  = sys.argv[1]
+hora  = sys.argv[2]
+latitud = sys.argv[3]
+longitud = sys.argv[4]
 
 #datos de ejemplo
-zona = "zapopan"
-hora = "13"
-latitud = "20.7416236"
-longitud = "-103.3843281"
+#zona = "zapopan"
+#hora = "13"
+#latitud = "20.7416236"
+#longitud = "-103.3843281"
 
 ###tratamiento y normalización de los datos###
 #separamos el dataframe por columnas
@@ -69,13 +68,10 @@ for i in range(0,len(zh)):
               (float(newzh[0][0]) - float(zone[i]))**2 + 
               (float(newzh[0][1]) - float(hour[i]))**2)
     dist_e = math.sqrt(dist_e)
-    #Distancia hamming variables categoricas
-
     #suma de distancias
     sum = dist_e 
     #distancia final
     distancia[i] = sum
-#print(distancia)
 #Ordenamiento y selección de los k vecinos más cercanos
 datatrained = list(zip(t,distancia))
 datatrained = sorted(datatrained, key=lambda x: x[1])
@@ -84,7 +80,6 @@ k = 8
 nearest = np.empty(k)
 for i in range(0,k):
     nearest[i] = int(datatrained[i][0])
-#print(nearest)
 #definir clase
 asalto = 0
 accidente = 0
