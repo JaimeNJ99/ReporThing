@@ -1,6 +1,12 @@
 <?php
     require "../conexion.php";
+    require "../conexionReplica.php";
     $conn = conexion(); //conexion a la BD
+    $bandera=0;
+    if(!$conn){
+      $bandera=1;
+      $conn=conexionR();
+    }
 
     $sql1="SELECT COUNT(*) FROM reportes WHERE tipo = 1 AND estatus = 1";
     $result1=pg_query($conn,$sql1);

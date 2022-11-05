@@ -1,6 +1,12 @@
 <?php
     require "../conexion.php";
+    require "../conexionReplica.php";
     $conn = conexion(); //conexion a la BD
+    $bandera=0;
+    if(!$conn){
+      $bandera=1;
+      $conn=conexionR();
+    }
     $sql = "SELECT COUNT(*) FROM reportes WHERE zona = 'tlaquepaque' AND fecha > CURRENT_DATE - INTERVAL '1' MONTH";
     $res = pg_query($conn,$sql);
     if($res != 0){

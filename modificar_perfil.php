@@ -1,5 +1,9 @@
 <?php
     require "header.php";
+    $bandera=0;
+    if(!$conn){
+      $bandera=1;
+    }
 ?>
 <html>
     <head>
@@ -56,6 +60,9 @@
             <br>
             <div id="base">
                 <br>
+                <?php if(isset($bandera == 1){ ?>
+                    <div>No disponible</div>
+                <?php }else{ ?>
                 <div class="columna"><label>Nombre: </label><input type="text" id="user" name="user" placeholder="Escribe tu nuevo nombre." onkeypress="return event.keyCode != 13;"></div><br> 
                 <div class="columna"><label>Contraseña: </label><input type="text" id="password" name="password" placeholder="Escribe tu nueva contraseña." onkeypress="return event.keyCode != 13;"></div><br>
                 <div class="columna"><label>Avatar nuevo:</label><br>
@@ -64,6 +71,7 @@
                 <br>
                 <div id="mensaje" class="error"></div>
             </div>
+            <?php } ?>
         </form>
         <br><br><br>
         </body>

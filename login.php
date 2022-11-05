@@ -1,5 +1,10 @@
 <?php
     require "header.php";
+    require "funciones/conexionReplica.php";
+    $bandera=0;
+    if(!isset($conn)){
+      $bandera=1;
+    }
 ?>
 <html>
     <head>
@@ -75,7 +80,9 @@
                 <div class="columna">
                     <input onClick="validar(); return false;" type="submit" value="Ingresar">
                 </div>
+                <?php if($bandera == 0){ ?>
                 <div class="columna">¿No tienes una cuenta? <a href="register.php">Registrate</a></div>
+                <?php } ?>
                 <div id="mensaje" class="error"></div>
             </div>
             <br><br><br><br>

@@ -1,5 +1,9 @@
 <?php
     require "header.php";
+    $bandera=0;
+    if(!$conn){
+      $bandera=1;
+    }
 
     if(!isset($idu)){
       $id = time() * rand(1,20);
@@ -87,6 +91,9 @@
     <body>
         <form  name="registro" action="funciones/registroReporte.php" method="post" enctype="multipart/form-data">
             <br>
+            <?php if($bandera == 1){ ?>
+                    <div>No disponible</div>
+                <?php }else{ ?>
             <h2 style="text-align: center">Nuevo Reporte</h2>
             <br>
             <div id="base">
@@ -113,6 +120,7 @@
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <br>
             </div>
+            <?php } ?>
         </form>
         <!-- Función Mapa -->
         <script type="text/javascript">

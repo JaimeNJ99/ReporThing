@@ -1,5 +1,11 @@
 <?php
     require "header.php";
+    require "funciones/conexionReplica.php";
+    $bandera=0;
+    if(!isset($conn)){
+      $bandera=1;
+      $conn=conexionR();
+    }
     if(isset($idu)){
         $id = $idu;
         if($_SESSION['admin'] == 1){
@@ -226,7 +232,7 @@
                     <br>
                     <input type="submit" value="Ver ubicación" onclick="verReporte(<?php echo $consulta[0]; ?>)">
                     <br>
-                    <?php if(isset($idu)){ ?>
+                    <?php if(isset($idu) && $bandera==0){ ?>
                         <div class="texto">
                             <input type="submit" value="Reportar abuso" onclick="reportado(<?php echo $consulta[0]; ?>, <?php echo $id; ?>)">
                             <?php if(isset($admin)){ ?>

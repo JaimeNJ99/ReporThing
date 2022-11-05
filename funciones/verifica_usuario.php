@@ -3,7 +3,13 @@
     session_start();
 
     require "conexion.php";
+    require "conexionReplica.php";
     $conn = conexion();
+    $bandera=0;
+    if(!$conn){
+      $bandera=1;
+      $conn=conexionR();
+    }
 
     //recibimos los datos del usuario
     $correo = $_REQUEST['correo'];

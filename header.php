@@ -3,7 +3,7 @@
     session_start();
 
     require "funciones/conexion.php";
-    $conn = conexion(); //conexion a la BD
+    
     header('Content-Type: text/html; charset=UTF-8');
     //si existe la sesion tomamos el id
     if(isset($_SESSION["idu"])){
@@ -220,3 +220,6 @@
         <div id="bg"></div>
     </body>
 </html>
+<?php
+    $conn = conexion(); //conexion a la BD
+?>

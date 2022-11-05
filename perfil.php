@@ -1,7 +1,12 @@
 <?php 
     require "header.php";
+    require "funciones/conexionReplica.php";
+    $bandera=0;
+    if(!isset($conn)){
+      $bandera=1;
+      $conn=conexionR();
+    }
   
-    
     $sql = "SELECT * FROM reportes WHERE reportes.id_reporte IN 
         (SELECT reportes_realizados.id_reporte FROM reportes_realizados WHERE id_usuario = $idu)";
     $res = pg_query($conn, $sql);
@@ -103,7 +108,9 @@
             </div>
             <br><br>
             <div style="width: 100%; display: inline-block; text-align: center;">
-                <input type="button" value="Modificar Perfil" id="modificar" onclick="modificar();">
+                <?php if($bandera==0){ ?>
+                    <input type="button" value="Modificar Perfil" id="modificar" onclick="modificar();">
+                <?php } ?>
             </div>
             <br><br>
             <div id="reportes">

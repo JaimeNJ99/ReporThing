@@ -1,5 +1,11 @@
 <?php
     require "header.php";
+    require "funciones/conexionReplica.php";
+    $bandera=0;
+    if(!isset($conn)){
+      $bandera=1;
+      $conn=conexionR();
+    }
 ?>
 <html> 
     <head>

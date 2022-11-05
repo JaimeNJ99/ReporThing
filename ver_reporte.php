@@ -1,6 +1,13 @@
 <?php
     require "header.php";
     $id = $_GET["val"];
+    if(!isset($conn)){
+      $bandera=0;
+      $conn = pg_connect("host=192.168.194.2 dbname=reporthing user=postgres password=root");
+      if(!($conn)){
+        echo "Error: No se pudo conectar a la bd" ;
+      }else{$bandera=1;}
+    }
 ?>
 <html> 
     <head>
