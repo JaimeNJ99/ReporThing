@@ -60,7 +60,7 @@
             <br>
             <div id="base">
                 <br>
-                <?php if(isset($bandera == 1){ ?>
+                <?php if($bandera == 1){ ?>
                     <div>No disponible</div>
                 <?php }else{ ?>
                 <div class="columna"><label>Nombre: </label><input type="text" id="user" name="user" placeholder="Escribe tu nuevo nombre." onkeypress="return event.keyCode != 13;"></div><br> 
@@ -70,10 +70,11 @@
                 <div class="columna"><input onClick="registrar(); return false;" type="submit" value="Aplicar cambios"></div>
                 <br>
                 <div id="mensaje" class="error"></div>
-            </div>
-            <?php } ?>
+                <?php } ?>
+            </div>  
         </form>
         <br><br><br>
-        </body>
+    </body>
+    <br><br><br>
     <?php require "footer.php" ?>
 </html>

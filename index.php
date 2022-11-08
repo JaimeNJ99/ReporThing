@@ -102,9 +102,11 @@
 						        dataType  : 'text',
                                 data      : 'zona=zapopan&latitud='+latitud+'&longitud='+longitud,
                                 success   : function(res){
+                                    if(res!=0){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
                                     $('#mensaje').html('El tipo de suceso más probable es: <br>'+ res);
+                                }else{alert("Actualmente no disponible");}
                                 },error: function(){
                                     x.style.display = "none";
 						            alert('Error al conectar al servidor...');
@@ -123,9 +125,11 @@
 						        dataType  : 'text',
                                 data      : 'zona=guadalajara&latitud='+latitud+'&longitud='+longitud,
                                 success   : function(res){
+                                    if(res!=0){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
                                     $('#mensaje').html('El tipo de suceso más probable es: <br>'+ res);
+                                }else{alert("Actualmente no disponible");}
                                 },error: function(){
                                     x.style.display = "none";
 						            alert('Error al conectar al servidor...');
@@ -144,9 +148,11 @@
 						        dataType  : 'text',
                                 data      : 'zona=tlaquepaque&latitud='+latitud+'&longitud='+longitud,
                                 success   : function(res){
+                                    if(res!=0){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
                                     $('#mensaje').html('El tipo de suceso más probable es: <br>'+ res);
+                                }else{alert("Actualmente no disponible");}
                                 },error: function(){
                                     x.style.display = "none";
 						            alert('Error al conectar al servidor...');
@@ -165,9 +171,11 @@
 						        dataType  : 'text',
                                 data      : 'zona=tonala&latitud='+latitud+'&longitud='+longitud,
                                 success   : function(res){
+                                   if(res!=0){
                                     mensaje.style.display = "block";
                                     x.style.display = "none";
                                     $('#mensaje').html('El tipo de suceso más probable es: <br>'+ res);
+                                }else{alert("Actualmente no disponible");}
                                 },error: function(){
                                     x.style.display = "none";
 						            alert('Error al conectar al servidor...');

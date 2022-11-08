@@ -41,32 +41,32 @@
 
     </style>
     <body>
-        <h1 style="text-align:center">Graficas</h1>
+        <h1 style="text-align:center">Gráficas</h1>
         <br>
         <div id="base">
             <br>
 	        <div class="grafica">
-                <div class="titulog"><label>Numero de Reportes totales</label></div>
+                <div class="titulog"><label>Número de Reportes totales</label></div>
                 <div id="Grafica1" class="graf"></div>
 	        </div><br>
             <div class="grafica">
-                <div class="titulog" class="graf"><label>Ultimo mes</label></div>
+                <div class="titulog" class="graf"><label>Último mes</label></div>
                 <div id="Grafica2" class="graf"></div>
             </div><br>
 	        <div class="grafica">
-                <div class="titulog"><label>Ultimo mes, en Guadalajara</label></div>
+                <div class="titulog"><label>Último mes, en Guadalajara</label></div>
                 <div id="Grafica3" class="graf"></div>
             </div><br>
             <div class="grafica">
-                <div class="titulog"><label>Ultimo mes, en Zapopan</label></div>
+                <div class="titulog"><label>Último mes, en Zapopan</label></div>
                 <div id="Grafica4" class="graf"></div>
 	        </div><br>
             <div class="grafica">
-                <div class="titulog"><label>Ultimo mes, en Tlaquepaque</label></div>
+                <div class="titulog"><label>Último mes, en Tlaquepaque</label></div>
                 <div id="Grafica5" class="graf"></div>
 	        </div><br>
             <div class="grafica">
-                <div class="titulog"><label>Ultimo mes, en Tonalá</label></div>
+                <div class="titulog"><label>Último mes, en Tonalá</label></div>
                 <div id="Grafica6" class="graf"><b></b></div>
 	        </div><br>
         </div> 

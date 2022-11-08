@@ -13,7 +13,9 @@
         Mapa
     </title>
     <script src="JavaScript/jquery-3.6.0.min.js"></script>
+    
     <script> function initMap(){} </script>
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUkFLr3FhXywsglhyFSpg1CitJHWRh_dQ&callback=initMap&libraries=&v=weekly&libraries=geometry"></script>
     <!-- <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script> -->
         
@@ -38,9 +40,13 @@
             <br>
             <div id="base"> 
               <br>
+              <?php if($bandera == 1){
+                echo "No disponible";
+              }else{ ?>
               <div id="google_canvas"  class="google_canvas"></div>   
               <input type="hidden" id="latitud" name="latitud">
               <input type="hidden" id="longitud" name="longitud">
+              <?php } ?>
             </div>
         <script type="text/javascript">
         var map;

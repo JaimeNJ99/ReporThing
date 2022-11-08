@@ -1,4 +1,11 @@
 <?php
+require "conexionReplica.php";
+require "conexion.php";
+    $conn = conexion(); //conexion a la BD
+    $bandera=0;
+    if(!$conn){
+      echo $out=0;
+    }else{
     date_default_timezone_set('America/Mexico_City');
     if(isset($_REQUEST['zona'])){
         $zona = $_REQUEST['zona'];
@@ -20,4 +27,5 @@
         }
         echo $out;
     }
+}
 ?>

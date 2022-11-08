@@ -88,5 +88,6 @@
             <br><br><br><br>
         </form>
     </body>
+    <br><br><br>
     <?php require "footer.php" ?>
 </html>

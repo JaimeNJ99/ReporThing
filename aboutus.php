@@ -26,6 +26,8 @@
         Nepomuceno Jiménez Jaime<br>
 
         </div>
-        <?php require "footer.php"; ?>        
+        <?php require "footer.php"; ?>  
+        <br><br><br><br><br><br><br>      
     </body>
+    <br><br><br><br><br><br><br>
 </html> 
