@@ -18,6 +18,13 @@
     
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUkFLr3FhXywsglhyFSpg1CitJHWRh_dQ&callback=initMap&libraries=&v=weekly&libraries=geometry"></script>
     <!-- <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script> -->
+    <script type="text/javascript">
+      $(document).ready(function(){
+      $("#cerrar").click(function(){
+        $("#aviso").hide();
+      });
+    });
+    </script>
         
         <style>
             #base{
@@ -32,9 +39,30 @@
               width: 90%;
               margin: auto;
             }
+            #aviso{
+                width: 500px;
+                height: auto;
+                background: lightsteelblue;
+                border: 1px solid #000;
+                display: block;
+                margin: auto;
+                text-align: center;
+            }
+            #cerrar{
+                float: right;
+                margin-right: 1px;
+                
+            }
         </style>
     </head>
     <body>
+      <div id="aviso">
+            <b style="text-align: center;">¡Aviso!</b>
+            <button id="cerrar">x</button><br>
+            <b>Los reportes de está pagina son generados por los usuarios por lo que puede haber reportes falsos,</b>
+            <b> te recomendamos siempre consultar fuentes oficiales.</b>
+        </div><br>
+
             <br>
             <h2 style="text-align: center">Mapa</h2>
             <br>

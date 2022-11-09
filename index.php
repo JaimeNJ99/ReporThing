@@ -248,6 +248,19 @@
                 background-color: #D3D3D3;
                 display: block;
             }
+            #block1{
+                width: auto;
+                height: 300px;
+                background-color: #D3D3D3;
+                display: block;
+            }
+            #block2{
+                width: auto;
+                height: 400px;
+                background-color: #D3D3D3;
+                display: block;
+            }
+
             .textboxl{
                 float: left;
                 margin-left: 18%;
@@ -255,6 +268,13 @@
                 height: 250px;
                 width: 30%;
                 color:darkmagenta;
+            }
+            .textbox{
+                
+                height: 250px;
+                width: 30%;
+                color:darkmagenta;
+
             }
             .textboxr{
                 float: right;
@@ -269,6 +289,30 @@
                 text-align: center;
                 color:darkmagenta;
                 font-size: 40px;
+            }
+            .columnar{
+                height: auto;
+                width: 300px;
+                float: right;
+                margin-right: 25.5%;
+                color:darkmagenta;
+                background-color: #87CEFA;
+                min-height: 310px;
+            }
+             .columnal{
+                height: auto;
+                width: 300px;
+                float: left;
+                background-color:#87CEFA ;
+                margin-left: 25.5%;
+                color:darkmagenta;
+                min-height: 310px;
+            }
+            #conSu{
+               color: darkmagenta;
+               font-size: 40px;
+               margin-top: 10px; 
+               margin-bottom: 10px;
             }
 
         </style>
@@ -303,8 +347,42 @@
                 </div><br><br><br><br><br>
                 <div id="mensaje"></div>
             </div>
+
+        </div><br>
+                <div id="block2">
+            
+                <div>
+                    <div id="conSu">Conoce los tipos de suceso</div>
+                </div>
+                <div class="columnal">
+                <div><br>
+                    <div><B>Asalto</B></div>
+                    <div>Ataque contra una persona o entrada en una propiedad con intención de robar.</div>
+                </div>
+                <div><br>
+                    <div><B>Accidente</B></div>
+                    <div>Suceso imprevisto que altera la marcha normal o prevista de las cosas, especialmente el que causa daños a una persona o cosa.</div>
+                </div>
+                <div><br>
+                    <div><B>Acoso</B></div>
+                    <div>El delito de acoso consiste en que una persona acecha y molesta a otra insistentemente perturbando su vida diaria y su libertad.</div>
+                </div>
+                </div>
+                <div class="columnar">
+                <div><br>
+                    <div><B>Precaución</B></div>
+                    <div>Este es una advertencia sobre situaciones fuera de lo común en la zona a las que conviene estar alerta.</div>
+                </div>
+                <div><br>
+                    <div><B>Otro</B></div>
+                    <div>Esta es una advertencia sobre situaciones fuera de lo común en la zona no necesariamente perjudiciales o peligrosas pero si relevantes.</div>
+                </div>
+                </div>
+            
+
         </div><br><br>
-        <div id="block">
+    
+            <div id="block1">
             <div class="textboxl">
                 <div><br>
                     <div><B>Emergencias</B></div>
@@ -328,6 +406,8 @@
             </div>
         </div>
     </div>
+
+
     <?php require "footer.php"; ?>
     </body>
 </html>

@@ -26,7 +26,7 @@
 						type      : 'post',
 						dataType  : 'text',
 						success   : function(res){ 
-						    if(res != 0){
+						    if(res > 0){
 						    	$('#mensaje'+reporte).html('Reporte registrado');
 						    }else{
                                 $('#mensaje'+reporte).html('Ya se ha registrado tu reporte');
