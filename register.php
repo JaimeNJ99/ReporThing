@@ -86,7 +86,7 @@
             <br>
             <div id="login">
                 <br>
-                <?php if(isset($bandera == 1){ ?>
+                <?php if($bandera == 1){ ?>
                     <div>No disponible</div>
                 <?php }else{ ?>
                 <div class="columna"><label>Nombre: </label><br><input type="text" id="user" name="user" placeholder="Escribe tu nombre." onkeypress="return event.keyCode != 13;"></div>

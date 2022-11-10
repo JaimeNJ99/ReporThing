@@ -8,7 +8,7 @@
             ReporThing || Politica de privacidad
         </title>
         <style>
-            #info{
+            .info{
                 text-align: center; 
                 width: 400px;
                 margin-left: auto;
@@ -18,10 +18,14 @@
     </head>
     <body>
     <br><br>
-        <div id = "info">
+        <div class = "info">
         Esta página web es parte de nuestro proyecto modular, es por esto que toda 
         la información recolectada por esta pagina web esta destinada unica y
         exclusivamente con ese fin.
+        </div>
+        <br>
+        <div class="info">
+            Toda información recabada por el sitio solo se hará uso para las funciones exclusivamente del sitio.
         </div>
         <?php require "footer.php"; ?>        
     </body>
