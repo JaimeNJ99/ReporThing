@@ -13,7 +13,7 @@ from collections import Counter
 #creamos conexion con los datos especificados
 engine = create_engine('postgresql+psycopg2://postgres:root@localhost/reporthing')
 #Seleccionamos los datos de la bd
-sql = "SELECT tipo, latitud, longitud, hora, zona  FROM reportes WHERE estatus = 1 AND fecha > CURRENT_DATE - INTERVAL '1' MONTH"
+sql = "SELECT tipo, latitud, longitud, hora, zona  FROM reportes WHERE estatus = 1 AND fecha >= CURRENT_DATE - 14"
 #creamos un dataframe con la consulta
 datos = pd.read_sql_query(sql, engine)
 ###Recojemos los datos enviados desde php###
